@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Form, Link, useNavigate } from 'react-router-dom'
 import { RotatingLines } from 'react-loader-spinner'
 import { ToastContainer, toast } from 'react-toastify';
+import axios from 'axios';
 
 function Management() {
     const Navigate = useNavigate()
@@ -22,9 +23,14 @@ function Management() {
             toast.info("Confirm password doesn't match")
         }else{
             setLoader(true)
+            axios.post(`${import.meta.env.VITE_BACKEND_URL}/CreateManagerAccount`,{Name,Email,PhoneNo,EmpId,Password})
+            .then((res)=>{
+                console.log(res);  
+            })
+            .catch((error)=>{
+                console.log(error);
+            })
         }
-        
-        
         
     }
 
