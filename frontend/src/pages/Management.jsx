@@ -25,10 +25,16 @@ function Management() {
             setLoader(true)
             axios.post(`${import.meta.env.VITE_BACKEND_URL}/CreateManagerAccount`,{Name,Email,PhoneNo,EmpId,Password})
             .then((res)=>{
-                console.log(res);  
+                if(res){
+                    Navigate('/Success')
+                }
+                
             })
             .catch((error)=>{
-                console.log(error);
+                if(error.response.data.message === 'Email or Phone already exists'){
+                    toast.warn('Email Or PhoneNo already Exists.')
+                    setLoader(false)
+                }
             })
         }
         
