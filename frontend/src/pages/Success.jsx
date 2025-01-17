@@ -1,9 +1,14 @@
 import React, { useRef } from 'react'
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import { Form, Link, useNavigate } from 'react-router-dom'
+
+
+
 
 function Success() {
 
+    const Navigate = useNavigate()
     const successone = useRef()
     const successtwo = useRef()
     const successthree = useRef()
@@ -45,7 +50,9 @@ function Success() {
         </div>
 
         <div ref={successthree}>
-            <button className='bg-white p-2 shadow-lg rounded-lg px-3 font-roboto hover:bg-gray-500'>Proceed to Login</button>
+            <button className='bg-white p-2 shadow-lg rounded-lg px-3 font-roboto hover:bg-gray-500' onClick={()=>{
+                Navigate('/ManagerLogin')
+            }}>Proceed to Login</button>
         </div>
     </div>
   )

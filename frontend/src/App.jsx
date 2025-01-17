@@ -6,6 +6,7 @@ import Home from './pages/Home'
 import {createBrowserRouter, Router, RouterProvider} from 'react-router-dom'
 import Management from './pages/Management'
 import Success from './pages/Success'
+import ManagerLogin from './pages/ManagerLogin'
 
 function App() {
   const Router = createBrowserRouter([
@@ -20,6 +21,10 @@ function App() {
     {
       path:'/Success',
       element : <Success/>
+    },
+    {
+      path:'/ManagerLogin',
+      element : <ManagerLogin/>
     },
     
   ])
