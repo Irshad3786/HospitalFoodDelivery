@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import cors from 'cors'
 import cookieParser from 'cookie-parser';
 import CreateAccountManager from './routes/ManagerAccountCreRoute.js'
+import ManagerLogin from './routes/ManagerLogin.js';
 
 dotenv.config()
 const app = express()
@@ -28,6 +29,7 @@ mongoose.connect(process.env.MONGOURL)
 
 
 app.use('/CreateManagerAccount',CreateAccountManager)
+app.use('/ManagerLogin',ManagerLogin)
 
 const PORT = process.env.PORT || 5000;
 

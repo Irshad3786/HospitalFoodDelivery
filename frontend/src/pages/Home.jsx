@@ -48,7 +48,7 @@ function Home() {
 
         {menu && (<div className=' absolute w-[100%] h-[20%] flex justify-center pl-20 md:pl-[42%] sm:pl-[45%]'>
             <div className='flex flex-col w-64 h-[100%]'>
-                <Link to="" className='border border-black p-2 hover:bg-[#00FFAA] cursor-pointer'>Hospital Management login</Link>
+                <Link to="/ManagerLogin" className='border border-black p-2 hover:bg-[#00FFAA] cursor-pointer'>Hospital Management login</Link>
                 <Link to="" className='border border-black p-2 hover:bg-[#00FFAA] cursor-pointer'>Pantry Login</Link>
                 <Link to="" className='border border-black p-2 hover:bg-[#00FFAA] cursor-pointer'>Delivery Login</Link>
             </div>

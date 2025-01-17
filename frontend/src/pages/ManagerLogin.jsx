@@ -1,15 +1,42 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useState } from 'react'
 import { Form, Link } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
 
 function ManagerLogin() {
+  const [Email , setEmail] = useState('')
+  const [Password , setPassword] = useState('')
+
+  const Submit =()=>{
+    if(!Email || !Password){
+      toast.warn("Fill in all fields.")
+    }else{
+      axios.post(`${import.meta.env.VITE_BACKEND_URL}/ManagerLogin`,{Email,Password},{ withCredentials: true })
+      .then((res)=>{
+        console.log(res);
+      })
+      .catch((error)=>{
+        console.log(error);
+      })
+    }
+  }
+  
   return (
     <div>
       <div className='bg-[#00FFAA] w-[100%] h-screen'>
+      <ToastContainer/>
         <h1 className='text-center pt-10 text-xl font-mono sm:text-2xl md:text-3xl'>Manager Dashboard Login</h1>
-        <Form >
-            <div className='flex flex-col justify-center items-center gap-7 pt-28'>
-              <input type="email" className='p-3 rounded-lg shadow-lg placeholder:font-roboto placeholder:font-semibold w-[80%] sm:w-[50%] md:w-[30%]' placeholder='Enter Email'/>
-              <input type="password" className='p-3 rounded-lg shadow-lg placeholder:font-roboto placeholder:font-semibold w-[80%] sm:w-[50%] md:w-[30%]' placeholder='Enter Password ' />
+        <Form onSubmit={Submit} >
+            <div className='flex flex-col justify-center items-center gap-7 pt-44'>
+              <input type="email" className='p-3 rounded-lg shadow-lg placeholder:font-roboto placeholder:font-semibold w-[80%] sm:w-[50%] md:w-[30%]' placeholder='Enter Email' value={Email}
+               onChange={(e)=>{setEmail(e.target.value)}}/>
+
+              <input type="password" className='p-3 rounded-lg shadow-lg placeholder:font-roboto placeholder:font-semibold w-[80%] sm:w-[50%] md:w-[30%]' placeholder='Enter Password ' 
+                value={Password}
+                onChange={(e)=>{
+                  setPassword(e.target.value)
+                }}
+              />
               
               <button className='p-2 bg-white rounded-lg shadow-xl px-3 font-roboto hover:bg-slate-500'>Login</button>
             </div>
