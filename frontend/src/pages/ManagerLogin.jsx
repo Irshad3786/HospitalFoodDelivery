@@ -1,11 +1,13 @@
 import axios from 'axios';
 import React, { useState } from 'react'
-import { Form, Link } from 'react-router-dom'
+import { Form, Link, useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 
 function ManagerLogin() {
   const [Email , setEmail] = useState('')
   const [Password , setPassword] = useState('')
+
+  const Navigate = useNavigate()
 
   const Submit =()=>{
     if(!Email || !Password){
@@ -13,7 +15,9 @@ function ManagerLogin() {
     }else{
       axios.post(`${import.meta.env.VITE_BACKEND_URL}/ManagerLogin`,{Email,Password},{ withCredentials: true })
       .then((res)=>{
-        console.log(res);
+        if(res.data.message === "User Authenticated"){
+          Navigate('/ManagerDashboard')
+        }
       })
       .catch((error)=>{
         console.log(error);
