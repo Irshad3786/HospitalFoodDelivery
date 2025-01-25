@@ -8,6 +8,10 @@ import Management from './pages/Management'
 import Success from './pages/Success'
 import ManagerLogin from './pages/ManagerLogin'
 import ManagerDashboard from './pages/ManagerDashboard'
+import AddPatient from './pages/AddPatient'
+import CreateDiet from './pages/CreateDiet'
+import Pantry from './pages/Pantry'
+import TrackMeals from './pages/TrackMeals'
 
 function App() {
   const Router = createBrowserRouter([
@@ -30,6 +34,22 @@ function App() {
     {
       path:'/ManagerDashboard',
       element : <ManagerDashboard/>
+    },
+    {
+      path:'/AddPatient',
+      element : <AddPatient/>
+    },
+    {
+      path:'/CreateDiet',
+      element : <CreateDiet/>
+    },
+    {
+      path:'/PantryBox',
+      element : <Pantry/>
+    },
+    {
+      path:'/TrackMeals',
+      element : <TrackMeals/>
     },
     
   ])
