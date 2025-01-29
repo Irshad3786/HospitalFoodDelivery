@@ -86,11 +86,11 @@ function CreateDiet() {
               <div className='p-2'>
                 <select className='px-2 p-1 rounded-lg md:px-10'>
                   <option value="">Select Pantry</option>
-                  <option value="">apple with milk 1/2 </option>
-                  <option value="">orange juice boild egg</option>
-                  <option value="">srinu</option>
-                  <option value="">sivaha</option>
-                  <option value="">prabhu</option>
+                  <option value="">FLORE ONE </option>
+                  <option value="">BIO PANTY</option>
+                  <option value="">pple with milk 1/2</option>
+                  <option value="">pple with milk 1/2</option>
+                  <option value="">pple with milk 1/2</option>
                 </select>
               </div>
           </div>

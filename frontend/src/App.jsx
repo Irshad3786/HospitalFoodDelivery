@@ -12,6 +12,9 @@ import AddPatient from './pages/AddPatient'
 import CreateDiet from './pages/CreateDiet'
 import Pantry from './pages/Pantry'
 import TrackMeals from './pages/TrackMeals'
+import Morning from './pages/Morning'
+import Evening from './pages/Evening'
+import Night from './pages/Night'
 
 function App() {
   const Router = createBrowserRouter([
@@ -50,6 +53,18 @@ function App() {
     {
       path:'/TrackMeals',
       element : <TrackMeals/>
+    },
+    {
+      path:'/Morning',
+      element : <Morning/>
+    },
+    {
+      path:'/Evening',
+      element : <Evening/>
+    },
+    {
+      path:'/Night',
+      element : <Night/>
     },
     
   ])
