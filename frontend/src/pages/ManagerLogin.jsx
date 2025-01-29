@@ -31,7 +31,7 @@ function ManagerLogin() {
       <ToastContainer/>
         <h1 className='text-center pt-10 text-xl font-mono sm:text-2xl md:text-3xl'>Manager Dashboard Login</h1>
         <Form onSubmit={Submit} >
-            <div className='flex flex-col justify-center items-center gap-7 pt-44'>
+            <div className='flex flex-col justify-center items-center gap-7 pt-28'>
               <input type="email" className='p-3 rounded-lg shadow-lg placeholder:font-roboto placeholder:font-semibold w-[80%] sm:w-[50%] md:w-[30%]' placeholder='Enter Email' value={Email}
                onChange={(e)=>{setEmail(e.target.value)}}/>
 
