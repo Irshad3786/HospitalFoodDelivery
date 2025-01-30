@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import { Form } from 'react-router-dom'
+import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 function AddPatient() {
     const [Name , setName] = useState('')
@@ -13,16 +16,50 @@ function AddPatient() {
     const [EmergencyContact ,setEmergencyContact] = useState('')
     const [Gender , setGender] = useState('')
 
+
+    const navigate = useNavigate()
+
     const PatientDataSubmit = ()=>{
-        console.log(Name,Diseases,Allergies,RoomNumber,BedNumber,FloorNumber,Age,PhoneNo,EmergencyContact,Gender);
-        
+        if(!Name || !Diseases || !Allergies || !RoomNumber || !BedNumber || !FloorNumber || !Age || !PhoneNo || !EmergencyContact || !Gender ){
+            toast.info('Fill in all fields.')
+        }else{
+            axios.post(`${import.meta.env.VITE_BACKEND_URL}/CreatePatient`,{Name,Diseases,Allergies,RoomNumber,BedNumber,FloorNumber,Age,PhoneNo,EmergencyContact,Gender})
+            .then((res)=>{
+                if(res.data.message === 'Patient Account Created Successfully'){
+                    toast.success('Patient Created Successfully')
+                    setName('')
+                    setDiseases('')
+                    setAllergies('')
+                    setRoomNumber('')
+                    setBedNumber('')
+                    setFloorNumber('')
+                    setAge('')
+                    setPhoneNo('')
+                    setEmergencyContact('')
+                    setGender('')
+                }
+            })
+            .catch((error)=>{
+                if(error.response.data.message === ' PhoneNo already exists'){
+                    toast.warn('PhoneNo already exists.')
+                    
+                }
+                
+            })
+        }
+    }
+
+
+    const back =()=>{
+        navigate('/ManagerDashboard')
     }
 
   return (
     <div className='bg-[#00FFAA] w-[100%] h-[100%]'>
+        <ToastContainer/>
         <div >
             <div className='p-4 '>
-                <button className='flex justify-center items-center text-lg shadow-lg font-semibold bg-white  rounded-xl pr-5 font-roboto hover:bg-slate-400'><svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 24 24"><path fill="currentColor" d="M13.836 8.964a.9.9 0 0 1 0 1.272L12.073 12l1.763 1.764a.9.9 0 1 1-1.273 1.272l-2.4-2.4a.9.9 0 0 1 0-1.272l2.4-2.4a.9.9 0 0 1 1.273 0"/></svg>Back </button>
+                <button onClick={back} className='flex justify-center items-center text-lg shadow-lg font-semibold bg-white  rounded-xl pr-5 font-roboto hover:bg-slate-400'><svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 24 24"><path fill="currentColor" d="M13.836 8.964a.9.9 0 0 1 0 1.272L12.073 12l1.763 1.764a.9.9 0 1 1-1.273 1.272l-2.4-2.4a.9.9 0 0 1 0-1.272l2.4-2.4a.9.9 0 0 1 1.273 0"/></svg>Back </button>
                 <h1 className='text-3xl font-outfit text-center p-5 font-semibold'>Add Patient</h1>
             </div>
             <div>
@@ -33,12 +70,12 @@ function AddPatient() {
                     <input type="text" placeholder='Full Name' className='p-3 rounded-md sm:w-[30%] shadow-lg' value={Name} onChange={(e)=>{setName(e.target.value)}} />
                     <input type="text" placeholder='Diseases' className='p-3 rounded-md sm:w-[30%] shadow-lg' value={Diseases} onChange={(e)=>{setDiseases(e.target.value)}} />
                     <input type="text" placeholder='Allergies' className='p-3 rounded-md sm:w-[30%] shadow-lg' value={Allergies} onChange={(e)=>{setAllergies(e.target.value)}} />
-                    <input type="number" placeholder='Room Number' className='p-3 rounded-md sm:w-[30%] shadow-lg' value={RoomNumber} onChange={(e)=>{setRoomNumber(e.target.value)}} />
-                    <input type="number" placeholder='Bed Number' className='p-3 rounded-md sm:w-[30%] shadow-lg' value={BedNumber} onChange={(e)=>{setBedNumber(e.target.value)}} />
-                    <input type="number" placeholder='Floor Number' className='p-3 rounded-md sm:w-[30%] shadow-lg' value={FloorNumber} onChange={(e)=>{setFloorNumber(e.target.value)}} />
-                    <input type="number" placeholder='Age' className='p-3 rounded-md sm:w-[30%] shadow-lg' value={Age} onChange={(e)=>{setAge(e.target.value)}} />
-                    <input type="text" placeholder='Phone No' className='p-3 rounded-md sm:w-[30%] shadow-lg' value={PhoneNo} onChange={(e)=>{setPhoneNo(e.target.value)}} />
-                    <input type="text" placeholder='Emergency Contact' className='p-3 rounded-md sm:w-[30%] shadow-lg' value={EmergencyContact} onChange={(e)=>{setEmergencyContact(e.target.value)}} />
+                    <input type="number" placeholder='Room Number' className='p-3 rounded-md sm:w-[30%] shadow-lg' value={RoomNumber} min="1" onChange={(e)=>{setRoomNumber(e.target.value)}} />
+                    <input type="number" placeholder='Bed Number' className='p-3 rounded-md sm:w-[30%] shadow-lg' value={BedNumber} min="1" onChange={(e)=>{setBedNumber(e.target.value)}} />
+                    <input type="number" placeholder='Floor Number' className='p-3 rounded-md sm:w-[30%] shadow-lg' value={FloorNumber} min="1" onChange={(e)=>{setFloorNumber(e.target.value)}} />
+                    <input type="number" placeholder='Age' className='p-3 rounded-md sm:w-[30%] shadow-lg' value={Age} min="1" onChange={(e)=>{setAge(e.target.value)}} />
+                    <input type="text" placeholder='Phone No' className='p-3 rounded-md sm:w-[30%] shadow-lg' value={PhoneNo}  onChange={(e)=>{setPhoneNo(e.target.value)}} />
+                    <input type="text" placeholder='Emergency Contact' className='p-3 rounded-md sm:w-[30%] shadow-lg' value={EmergencyContact}  onChange={(e)=>{setEmergencyContact(e.target.value)}} />
                     <div className='p-4 rounded-md sm:w-[30%] flex flex-col md:flex md:flex-row justify-center items-center'>
                         <h1 className='p-2 font-roboto font-bold text-2xl text-gray-700'>Gender</h1>
                         <label className='p-4 font-roboto text-lg '>

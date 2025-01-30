@@ -25,4 +25,5 @@ export const CreateManagerAccountController =  (req,res)=>{
             res.status(505).json({message:"Internal Server Error"})
             
         })
+        
 }
