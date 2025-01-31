@@ -4,6 +4,9 @@ import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
+
+
+
 function AddPatient() {
     const [Name , setName] = useState('')
     const [Diseases , setDiseases] = useState('')
@@ -15,6 +18,8 @@ function AddPatient() {
     const [PhoneNo , setPhoneNo] = useState('')
     const [EmergencyContact ,setEmergencyContact] = useState('')
     const [Gender , setGender] = useState('')
+
+
 
 
     const navigate = useNavigate()

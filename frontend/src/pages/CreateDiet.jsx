@@ -1,6 +1,29 @@
 import React from 'react'
+import io from 'socket.io-client';
+
+
+
+
+
+  
 
 function CreateDiet() {
+
+
+  useEffect(() => {
+    const socket = io(import.meta.env.VITE_BACKEND_URL);
+  
+
+    socket.on('patientCreated', (patientData) => {
+      console.log('New Patient Created: from ', patientData);
+    });
+  
+    return () => {
+      socket.off('patientCreated');
+    };
+  }, []);
+
+
   return (
     <div className='w-[100%] h-[100%] bg-[#00FFAA] flex flex-col justify-center items-center pb-12'>
       <div className='p-4 w-full'>
@@ -8,6 +31,7 @@ function CreateDiet() {
       </div>
 
       <h1 className='font-outfit text-4xl  p-6 font-semibold'>Create Diet</h1>
+      <h1 className='font-outfit text-4xl  p-6 font-semibold'>Data visible</h1>
       <div className='w-[85%] bg-white rounded h-[80%] shadow-xl font-roboto '>
         <div className='flex flex-col  justify-center items-center gap-4 py-8'>
           <div className='bg-gray-800 w-[90%] h-40 rounded-lg flex flex-col justify-center items-center'>
