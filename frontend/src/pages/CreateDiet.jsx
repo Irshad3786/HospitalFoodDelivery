@@ -1,13 +1,12 @@
 import React from 'react'
 import io from 'socket.io-client';
 import { useEffect } from 'react';
+import { useState } from 'react';
 
-
-
-
-  
 
 function CreateDiet() {
+
+ 
 
 
   useEffect(() => {
@@ -15,7 +14,8 @@ function CreateDiet() {
   
 
     socket.on('patientCreated', (patientData) => {
-      console.log('New Patient Created: from ', patientData);
+      console.log(patientData);
+      
     });
   
     return () => {
@@ -31,7 +31,7 @@ function CreateDiet() {
       </div>
 
       <h1 className='font-outfit text-4xl  p-6 font-semibold'>Create Diet</h1>
-      <h1 className='font-outfit text-4xl  p-6 font-semibold'>Data visible</h1>
+      <h1 className='font-outfit text-4xl  p-6 font-semibold'>Data Visible</h1>
       <div className='w-[85%] bg-white rounded h-[80%] shadow-xl font-roboto '>
         <div className='flex flex-col  justify-center items-center gap-4 py-8'>
           <div className='bg-gray-800 w-[90%] h-40 rounded-lg flex flex-col justify-center items-center'>

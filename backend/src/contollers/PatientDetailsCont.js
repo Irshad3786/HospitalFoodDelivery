@@ -12,8 +12,8 @@ export const CreatePatientDetailsController =  (req,res)=>{
                 return PatientDetailsModel.create({Name,Diseases,Allergies,RoomNumber,BedNumber,FloorNumber,Age,PhoneNo,EmergencyContact,Gender})
                 .then((patientDetails)=>{
                     res.status(201).json({message:"Patient Account Created Successfully"})
-                    
-                    io.emit('patientCreated',patientDetails)
+                    const AllPatientData = PatientDetailsModel.find({})
+                    io.emit('patientCreated',AllPatientData);
                 })
             } 
         })
