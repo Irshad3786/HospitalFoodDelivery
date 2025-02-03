@@ -11,9 +11,16 @@ export const CreatePatientDetailsController =  (req,res)=>{
             }else{
                 return PatientDetailsModel.create({Name,Diseases,Allergies,RoomNumber,BedNumber,FloorNumber,Age,PhoneNo,EmergencyContact,Gender})
                 .then((patientDetails)=>{
-                    res.status(201).json({message:"Patient Account Created Successfully"})
-                    const AllPatientData = PatientDetailsModel.find({})
-                    io.emit('patientCreated',AllPatientData);
+                    PatientDetailsModel.find({})
+                            .select('Name Diseases Allergies PhoneNo')  
+                            .then((allPatientData) => {
+                                io.emit('patientCreated', allPatientData);
+                            })
+                            .catch((err) => {
+                                console.error("Error fetching patient data for socket emit:", err);
+                            });
+                    
+                    return res.status(201).json({ message: "Patient Account Created Successfully" });
                 })
             } 
         })

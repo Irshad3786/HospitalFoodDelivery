@@ -2,20 +2,32 @@ import React from 'react'
 import io from 'socket.io-client';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import axios from 'axios';
 
 
 function CreateDiet() {
 
- 
+ const [Patientdata, setPatientData] = useState([]) 
+
+
+
+ useEffect(()=>{
+  axios.get(`${import.meta.env.VITE_BACKEND_URL}/FullPatientData`)
+  .then((data)=>{
+    
+  })
+  .catch((error)=>{
+    console.log(error);
+  })
+ },[])
+
 
 
   useEffect(() => {
     const socket = io(import.meta.env.VITE_BACKEND_URL);
-  
 
     socket.on('patientCreated', (patientData) => {
-      console.log(patientData);
-      
+      setPatientData(patientData)
     });
   
     return () => {
@@ -31,7 +43,6 @@ function CreateDiet() {
       </div>
 
       <h1 className='font-outfit text-4xl  p-6 font-semibold'>Create Diet</h1>
-      <h1 className='font-outfit text-4xl  p-6 font-semibold'>Data Visible</h1>
       <div className='w-[85%] bg-white rounded h-[80%] shadow-xl font-roboto '>
         <div className='flex flex-col  justify-center items-center gap-4 py-8'>
           <div className='bg-gray-800 w-[90%] h-40 rounded-lg flex flex-col justify-center items-center'>
@@ -59,11 +70,12 @@ function CreateDiet() {
               <div className='p-2'>
                 <select className='px-5 p-1 rounded-lg md:px-8'>
                 <option value="">Name</option>
-                  <option value="">Rahul</option>
-                  <option value="">Ramesh</option>
-                  <option value="">srinu</option>
-                  <option value="">sivaha</option>
-                  <option value="">prabhu</option>
+
+                {
+                  Patientdata.map((dataval)=>(
+                    <option value="">{dataval.Name}</option>
+                  ))
+                }
                 </select>
               </div>
 

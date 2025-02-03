@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 import CreateAccountManager from './routes/ManagerAccountCreRoute.js'
 import ManagerLogin from './routes/ManagerLogin.js';
 import PatienRoute from './routes/PatientRoute.js'
+import AllPatientData from './routes/AllPatientData.js'
 import http from 'http';
 import { Server } from 'socket.io';  
 
@@ -47,6 +48,7 @@ mongoose.connect(process.env.MONGOURL)
 app.use('/CreateManagerAccount',CreateAccountManager)
 app.use('/ManagerLogin',ManagerLogin)
 app.use('/CreatePatient',PatienRoute)
+app.use('/FullPatientData',AllPatientData)
 
 
 
