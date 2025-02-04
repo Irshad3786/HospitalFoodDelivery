@@ -64,7 +64,7 @@ function Home() {
 
         <div className='flex justify-center items-center w-[100%] h-[80%] pt-10 ' ref={quote}>
             
-            <h1 className='font-outfit text-5xl '>Fueling your recovery with wholesome meals, delivered with love.</h1>
+            <h1 className='font-outfit text-5xl text-center'>Fueling your recovery with wholesome meals, delivered with love.</h1>
         </div>
     </div>
   )
