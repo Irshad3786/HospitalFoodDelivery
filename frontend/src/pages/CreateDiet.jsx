@@ -3,6 +3,7 @@ import io from 'socket.io-client';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import axios from 'axios';
+import PatientListItems from '../components/PatientListItems';
 
 
 function CreateDiet() {
@@ -64,12 +65,15 @@ function CreateDiet() {
             
           </div>
 
-          <div className='bg-gray-800 w-[90%] h- rounded-lg flex flex-col justify-center items-center'>
+          <div className='bg-gray-800 w-[90%] h-96 rounded-lg flex flex-col justify-center items-center'>
               <h1 className='font-roboto font-semibold p-2 text-lg text-white underline'>Patient Details</h1>
               <div>
                 <input type="search" className='rounded-md p-2 md:w-72' placeholder='Search Patient' />
               </div>
-              <div className='p-2'>
+              <div className='pt-3'>
+                <PatientListItems data={Patientdata}/>
+              </div>
+              {/* <div className='p-2'>
                 <select className='px-5 p-1 rounded-lg md:px-8'>
                 <option value="">Name</option>
 
@@ -112,7 +116,7 @@ function CreateDiet() {
                   <option value="">4</option>
                   <option value="">5</option>
                 </select>
-              </div>
+              </div> */}
           </div>
           <div className='bg-gray-800 w-[90%] h-64 rounded-lg flex flex-col justify-center items-center'>
               <h1 className='font-roboto font-semibold p-2 text-lg text-white underline'>Food Chat</h1>
