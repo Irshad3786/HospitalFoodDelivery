@@ -12,7 +12,12 @@ function CreateDiet() {
 
  const [Shift , setShift] = useState('')
 
+ const [PatientSearch , setPatientSearch] = useState('')
 
+ const [selectedPatient, setSelectedPatient] = useState('')
+
+  
+  
 
  useEffect(()=>{
   axios.get(`${import.meta.env.VITE_BACKEND_URL}/FullPatientData`)
@@ -68,55 +73,11 @@ function CreateDiet() {
           <div className='bg-gray-800 w-[90%] h-96 rounded-lg flex flex-col justify-center items-center'>
               <h1 className='font-roboto font-semibold p-2 text-lg text-white underline'>Patient Details</h1>
               <div>
-                <input type="search" className='rounded-md p-2 md:w-72' placeholder='Search Patient' />
+                <input type="search" className='rounded-md p-2 md:w-72' placeholder='Search Patient' value={PatientSearch} onChange={(e)=>{setPatientSearch(e.target.value)}} />
               </div>
               <div className='pt-3'>
-                <PatientListItems data={Patientdata}/>
+                <PatientListItems data={Patientdata} search = {PatientSearch} onSelectPatient={setSelectedPatient}/>
               </div>
-              {/* <div className='p-2'>
-                <select className='px-5 p-1 rounded-lg md:px-8'>
-                <option value="">Name</option>
-
-                {
-                  Patientdata.map((dataval)=>(
-                    <option value="">{dataval.Name}</option>
-                  ))
-                }
-                </select>
-              </div>
-
-              <div className='p-2'>
-                <select className='px-4 p-1 rounded-lg'>
-                <option value="">Floor No</option>
-                  <option value="">1</option>
-                  <option value="">2</option>
-                  <option value="">3</option>
-                  <option value="">4</option>
-                  <option value="">5</option>
-                </select>
-              </div>
-
-              <div className='p-2'>
-                <select className='px-4 p-1 rounded-lg'>
-                <option value="">Room No</option>
-                  <option value="">1</option>
-                  <option value="">2</option>
-                  <option value="">3</option>
-                  <option value="">4</option>
-                  <option value="">5</option>
-                </select>
-              </div>
-
-              <div className='p-2'>
-                <select className='px-4 p-1 rounded-lg'>
-                <option value="">Bed No</option>
-                  <option value="">1</option>
-                  <option value="">2</option>
-                  <option value="">3</option>
-                  <option value="">4</option>
-                  <option value="">5</option>
-                </select>
-              </div> */}
           </div>
           <div className='bg-gray-800 w-[90%] h-64 rounded-lg flex flex-col justify-center items-center'>
               <h1 className='font-roboto font-semibold p-2 text-lg text-white underline'>Food Chat</h1>
