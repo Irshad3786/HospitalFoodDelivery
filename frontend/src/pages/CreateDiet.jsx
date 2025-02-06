@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import axios from 'axios';
 import PatientListItems from '../components/PatientListItems';
+import FoodListItems from '../components/FoodListItems';
 
 
 function CreateDiet() {
@@ -14,8 +15,15 @@ function CreateDiet() {
 
  const [PatientSearch , setPatientSearch] = useState('')
 
- const [selectedPatient, setSelectedPatient] = useState('')
+ const [selectedPatient, setSelectedPatient] = useState(null)
+ const [selectedFood , setSelectedFood] = useState(null)
+ const [SpecificItems , setSpecificItems] = useState('')
+ const [AddIngredents , setAddIngredents] = useState('')
 
+ const [FoodSearch,setFoodSearch] = useState('')
+
+ 
+ 
   
   
 
@@ -79,28 +87,19 @@ function CreateDiet() {
                 <PatientListItems data={Patientdata} search = {PatientSearch} onSelectPatient={setSelectedPatient}/>
               </div>
           </div>
-          <div className='bg-gray-800 w-[90%] h-64 rounded-lg flex flex-col justify-center items-center'>
+          <div className='bg-gray-800 w-[90%] h-[70%] rounded-lg flex flex-col justify-center items-center pb-4'>
               <h1 className='font-roboto font-semibold p-2 text-lg text-white underline'>Food Chat</h1>
-              <div>
-                <input type="search" className='rounded-md p-2 md:w-72' placeholder='Search Food Items' />
+              <div className='pb-6'>
+                <input type="search" className='rounded-md p-2 md:w-72' placeholder='Search Food Items' value={FoodSearch} onChange={(e)=>{setFoodSearch(e.target.value)}} />
               </div>
+             <FoodListItems searchTerm={FoodSearch} onSelectFood = {setSelectedFood}/>
+
               <div className='p-2'>
-                <select className='px-2 p-1 rounded-lg md:px-10'>
-                  <option value="">Food Items</option>
-                  <option value="">apple with milk 1/2 </option>
-                  <option value="">orange juice boild egg</option>
-                  <option value="">srinu</option>
-                  <option value="">sivaha</option>
-                  <option value="">prabhu</option>
-                </select>
+                <input type="text" placeholder='Add Specific Food Items' className='p-2 rounded-xl md:w-72' value={SpecificItems} onChange={(e)=>{e.target.value}}  />
               </div>
 
               <div className='p-2'>
-                <input type="text" placeholder='Add Specific Food Items' className='p-2 rounded-xl md:w-72' />
-              </div>
-
-              <div className='p-2'>
-                <input type="text" placeholder='Add Ingredents' className='p-2 rounded-xl md:w-72' />
+                <input type="text" placeholder='Add Ingredents' className='p-2 rounded-xl md:w-72' value={AddIngredents} onChange={(e)=>{setAddIngredents(e.target.value)}} />
               </div>
           </div>
 
