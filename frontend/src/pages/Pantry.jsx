@@ -1,6 +1,8 @@
+import axios from 'axios'
 import React from 'react'
 import { useState } from 'react'
 import { Form } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
 
 function Pantry() {
       const [PantryName , setPantryName] = useState('')
@@ -10,8 +12,35 @@ function Pantry() {
       const [Password , setPassword ]= useState('')
       const [ConfirmPassword , setConfirmPassword] = useState('')
       
-      const PantryDataSubmit = ()=>{
-          console.log(PantryName,ContactInfo,Location,PantryNo,Password,ConfirmPassword);
+      const PantryDataSubmit = (e)=>{
+        e.preventDefault();
+
+        console.log(PantryName,ContactInfo,Location,PantryNo,Password,ConfirmPassword);
+        
+        if(!PantryName || !ContactInfo || !Location || !PantryNo || !Password || !ConfirmPassword ){
+            toast.info('Fill in all fields.')
+        }else if(Password != ConfirmPassword ){
+            toast.info('Confirm Password is Not Correct')
+        }else{
+            axios.post(`${import.meta.env.VITE_BACKEND_URL}/CreatePantry`,{PantryName,ContactInfo,Location,PantryNo,Password})
+            .then((res)=>{
+                if(res.data.message === 'Pantry Account Created Successfully'){
+                    toast.success('Pantry Created Successfully')
+                    setPantryName('')
+                    setContactInfo('')
+                    setLocation('')
+                    setPantryNo('')
+                    setPassword('')
+                    setConfirmPassword('')
+                }
+            })
+            .catch((error)=>{
+                if(error){
+                    console.log(error)
+                }
+                
+            })
+        }
           
       }
   
@@ -23,16 +52,16 @@ function Pantry() {
                 <h1 className='text-3xl font-outfit text-center p-5 font-semibold'>Add Pantry Details</h1>
             </div>
             <div>
-
+            <ToastContainer/>
              
             <Form onSubmit={PantryDataSubmit}>
                 <div className='flex flex-col justify-center items-center p-4 gap-4 '>
                     <input type="text" placeholder='Pantry Name' className='p-3 rounded-md sm:w-[30%] shadow-lg' value={PantryName} onChange={(e)=>{setPantryName(e.target.value)}} />
                     <input type="text" placeholder='Contact No' className='p-3 rounded-md sm:w-[30%] shadow-lg' value={ContactInfo} onChange={(e)=>{setContactInfo(e.target.value)}} />
                     <input type="text" placeholder='Location' className='p-3 rounded-md sm:w-[30%] shadow-lg' value={Location} onChange={(e)=>{setLocation(e.target.value)}} />
-                    <input type="text" placeholder='Pantry No' className='p-3 rounded-md sm:w-[30%] shadow-lg' value={PantryNo} onChange={(e)=>{setPantryNo(e.target.value)}} />
-                    <input type="password" placeholder='Password' className='p-3 rounded-md sm:w-[30%] shadow-lg' value={Password} onChange={(e)=>{setPassword(e.target.value)}} />
-                    <input type="password" placeholder='Confirm Password' className='p-3 rounded-md sm:w-[30%] shadow-lg' value={ConfirmPassword} onChange={(e)=>{setConfirmPassword(e.target.value)}} />
+                    <input type="text" placeholder='Pantry No' className='p-3 rounded-md sm:w-[30%] shadow-lg' value={PantryNo}  onChange={(e)=>{setPantryNo(e.target.value)}} />
+                    <input type="password" placeholder='Password' className='p-3 rounded-md sm:w-[30%] shadow-lg' value={Password}   onChange={(e)=>{setPassword(e.target.value)}} />
+                    <input type="password" placeholder='Confirm Password' className='p-3 rounded-md sm:w-[30%] shadow-lg'   value={ConfirmPassword} onChange={(e)=>{setConfirmPassword(e.target.value)}} />
                 </div>
 
                 <div className='flex justify-center items-center p-4 pb-10'>

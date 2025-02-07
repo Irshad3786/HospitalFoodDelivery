@@ -95,7 +95,7 @@ function CreateDiet() {
              <FoodListItems searchTerm={FoodSearch} onSelectFood = {setSelectedFood}/>
 
               <div className='p-2'>
-                <input type="text" placeholder='Add Specific Food Items' className='p-2 rounded-xl md:w-72' value={SpecificItems} onChange={(e)=>{e.target.value}}  />
+                <input type="text" placeholder='Add Specific Food Items' className='p-2 rounded-xl md:w-72' value={SpecificItems} onChange={(e)=>{setSpecificItems(e.target.value)}}  />
               </div>
 
               <div className='p-2'>
