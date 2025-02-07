@@ -8,6 +8,7 @@ import ManagerLogin from './routes/ManagerLogin.js';
 import PatienRoute from './routes/PatientRoute.js'
 import AllPatientData from './routes/AllPatientData.js'
 import PantryRoute from './routes/PantryRoute.js'
+import PantryAllData from './routes/PantryAllData.js'
 import http from 'http';
 import { Server } from 'socket.io';  
 
@@ -34,6 +35,7 @@ app.use(cors({
 app.use(cookieParser())
 app.use(express.json())
 
+
 mongoose.connect(process.env.MONGOURL)
 .then(()=>{
     console.log("mongodb connected successfully");
@@ -51,6 +53,7 @@ app.use('/ManagerLogin',ManagerLogin)
 app.use('/CreatePatient',PatienRoute)
 app.use('/FullPatientData',AllPatientData)
 app.use('/CreatePantry', PantryRoute)
+app.use('/FullPantryData',PantryAllData)
 
 
 

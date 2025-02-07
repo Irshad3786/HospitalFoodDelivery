@@ -11,6 +11,8 @@ function CreateDiet() {
 
  const [Patientdata, setPatientData] = useState([]) 
 
+ const [Pantrydata , setPantrydata] = useState([])
+
  const [Shift , setShift] = useState('')
 
  const [PatientSearch , setPatientSearch] = useState('')
@@ -22,7 +24,6 @@ function CreateDiet() {
 
  const [FoodSearch,setFoodSearch] = useState('')
 
- 
  
   
   
@@ -38,18 +39,45 @@ function CreateDiet() {
  },[])
 
 
+ useEffect(()=>{
+  axios.get(`${import.meta.env.VITE_BACKEND_URL}/FullPantryData`)
+  .then((data)=>{
+    
+  })
+  .catch((error)=>{
+    console.log(error);
+  })
+ },[])
+
+
+
 
   useEffect(() => {
     const socket = io(import.meta.env.VITE_BACKEND_URL);
 
     socket.on('patientCreated', (patientData) => {
       setPatientData(patientData)
+    })
+
+    socket.on('PantryCreated', (data) => {
+      setPantrydata(data)
     });
   
     return () => {
       socket.off('patientCreated');
+      socket.off('PantryCreated');
     };
   }, []);
+
+
+ 
+
+
+
+
+
+  
+    
 
 
   return (
@@ -109,12 +137,10 @@ function CreateDiet() {
               
               <div className='p-2'>
                 <select className='px-2 p-1 rounded-lg md:px-10'>
-                  <option value="">Select Pantry</option>
-                  <option value="">FLORE ONE </option>
-                  <option value="">BIO PANTY</option>
-                  <option value="">pple with milk 1/2</option>
-                  <option value="">pple with milk 1/2</option>
-                  <option value="">pple with milk 1/2</option>
+
+                  {Pantrydata.map((data,index)=>(
+                    <option value="" key={index}>{data.Name}</option>
+                  ))}
                 </select>
               </div>
           </div>

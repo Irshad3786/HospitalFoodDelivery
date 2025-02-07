@@ -14,8 +14,6 @@ function Pantry() {
       
       const PantryDataSubmit = (e)=>{
         e.preventDefault();
-
-        console.log(PantryName,ContactInfo,Location,PantryNo,Password,ConfirmPassword);
         
         if(!PantryName || !ContactInfo || !Location || !PantryNo || !Password || !ConfirmPassword ){
             toast.info('Fill in all fields.')
@@ -35,8 +33,8 @@ function Pantry() {
                 }
             })
             .catch((error)=>{
-                if(error){
-                    console.log(error)
+                if(error.response.data.message == 'Pantry No or Phone No already exists'){
+                    toast.warn('Pantry No or Phone No already exists')
                 }
                 
             })
@@ -57,9 +55,9 @@ function Pantry() {
             <Form onSubmit={PantryDataSubmit}>
                 <div className='flex flex-col justify-center items-center p-4 gap-4 '>
                     <input type="text" placeholder='Pantry Name' className='p-3 rounded-md sm:w-[30%] shadow-lg' value={PantryName} onChange={(e)=>{setPantryName(e.target.value)}} />
-                    <input type="text" placeholder='Contact No' className='p-3 rounded-md sm:w-[30%] shadow-lg' value={ContactInfo} onChange={(e)=>{setContactInfo(e.target.value)}} />
+                    <input type="number" placeholder='Contact No' className='p-3 rounded-md sm:w-[30%] shadow-lg' value={ContactInfo} onChange={(e)=>{setContactInfo(e.target.value)}} />
                     <input type="text" placeholder='Location' className='p-3 rounded-md sm:w-[30%] shadow-lg' value={Location} onChange={(e)=>{setLocation(e.target.value)}} />
-                    <input type="text" placeholder='Pantry No' className='p-3 rounded-md sm:w-[30%] shadow-lg' value={PantryNo}  onChange={(e)=>{setPantryNo(e.target.value)}} />
+                    <input type="number" placeholder='Pantry No' className='p-3 rounded-md sm:w-[30%] shadow-lg' value={PantryNo}  onChange={(e)=>{setPantryNo(e.target.value)}} />
                     <input type="password" placeholder='Password' className='p-3 rounded-md sm:w-[30%] shadow-lg' value={Password}   onChange={(e)=>{setPassword(e.target.value)}} />
                     <input type="password" placeholder='Confirm Password' className='p-3 rounded-md sm:w-[30%] shadow-lg'   value={ConfirmPassword} onChange={(e)=>{setConfirmPassword(e.target.value)}} />
                 </div>
