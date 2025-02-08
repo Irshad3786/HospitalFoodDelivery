@@ -17,11 +17,12 @@ function CreateDiet() {
 
  const [PatientSearch , setPatientSearch] = useState('')
 
+ const [PantrySelected , setPantrySelected] = useState('')
+
  const [selectedPatient, setSelectedPatient] = useState(null)
  const [selectedFood , setSelectedFood] = useState(null)
  const [SpecificItems , setSpecificItems] = useState('')
  const [AddIngredents , setAddIngredents] = useState('')
-
  const [FoodSearch,setFoodSearch] = useState('')
 
  
@@ -60,6 +61,7 @@ function CreateDiet() {
     })
 
     socket.on('PantryCreated', (data) => {
+      
       setPantrydata(data)
     });
   
@@ -71,10 +73,10 @@ function CreateDiet() {
 
 
  
-
-
-
-
+ const finalSubmitFood =()=>{
+  console.log(Shift,selectedPatient,selectedFood,SpecificItems,AddIngredents,PantrySelected)
+  
+ }
 
   
     
@@ -136,16 +138,22 @@ function CreateDiet() {
               <h1 className='font-roboto font-semibold p-2 text-lg text-white underline'>Assign Pantry</h1>
               
               <div className='p-2'>
-                <select className='px-2 p-1 rounded-lg md:px-10'>
-
-                  {Pantrydata.map((data,index)=>(
-                    <option value="" key={index}>{data.Name}</option>
+                <select
+                  className='px-2 p-1 rounded-lg md:px-10'
+                  onChange={(e) => {
+                    const selectedObject = Pantrydata.find(data => String(data.PantryNo) === e.target.value);
+                    setPantrySelected(selectedObject || null);
+                  }}
+                >
+                  <option value=''>Select Pantry</option>
+                  {Pantrydata.map((data, index) => (
+                    <option value={String(data.PantryNo)} key={index}>{data.Name}</option>
                   ))}
                 </select>
               </div>
           </div>
 
-          <button className='bg-gray-950 font-roboto px-4 p-2 rounded-md text-white hover:bg-slate-400 hover:text-slate-950'>Submit</button>
+          <button className='bg-gray-950 font-roboto px-4 p-2 rounded-md text-white hover:bg-slate-400 hover:text-slate-950' onClick={finalSubmitFood}>Submit</button>
           
         </div>
       </div>
