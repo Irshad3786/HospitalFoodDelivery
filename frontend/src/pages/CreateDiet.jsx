@@ -5,6 +5,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import PatientListItems from '../components/PatientListItems';
 import FoodListItems from '../components/FoodListItems';
+import { ToastContainer, toast } from 'react-toastify';
 
 
 function CreateDiet() {
@@ -74,7 +75,19 @@ function CreateDiet() {
 
  
  const finalSubmitFood =()=>{
-  console.log(Shift,selectedPatient,selectedFood,SpecificItems,AddIngredents,PantrySelected)
+    if(!Shift || !selectedPatient || !selectedFood || !PantrySelected ){
+      toast.warn('Please Fill All Fields')
+    }else{
+      axios.post(`${import.meta.env.VITE_BACKEND_URL}/FoodOrders`,{Shift,selectedPatient,selectedFood,SpecificItems,AddIngredents,PantrySelected})
+      .then((data)=>{
+        console.log(data);
+      })
+      .catch((error)=>{
+        console.log(error);
+      })
+    }
+
+    
   
  }
 
@@ -84,6 +97,7 @@ function CreateDiet() {
 
   return (
     <div className='w-[100%] h-[100%] bg-[#00FFAA] flex flex-col justify-center items-center pb-12'>
+      <ToastContainer/>
       <div className='p-4 w-full'>
         <button className='flex justify-center items-center text-lg shadow-lg font-semibold bg-white  rounded-xl pr-5 font-roboto hover:bg-slate-400'><svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 24 24"><path fill="currentColor" d="M13.836 8.964a.9.9 0 0 1 0 1.272L12.073 12l1.763 1.764a.9.9 0 1 1-1.273 1.272l-2.4-2.4a.9.9 0 0 1 0-1.272l2.4-2.4a.9.9 0 0 1 1.273 0"/></svg>Back </button>
       </div>
