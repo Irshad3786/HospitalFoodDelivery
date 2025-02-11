@@ -10,6 +10,7 @@ import AllPatientData from './routes/AllPatientData.js'
 import PantryRoute from './routes/PantryRoute.js'
 import PantryAllData from './routes/PantryAllData.js'
 import OrdersRoute from './routes/OrdersRoute.js'
+import AllOrdersRoute from './routes/AllOrdersRoute.js'
 import http from 'http';
 import { Server } from 'socket.io';  
 
@@ -56,6 +57,7 @@ app.use('/FullPatientData',AllPatientData)
 app.use('/CreatePantry', PantryRoute)
 app.use('/FullPantryData',PantryAllData)
 app.use('/FoodOrders',OrdersRoute)
+app.use('/FullOrdersData',AllOrdersRoute)
 
 
 
