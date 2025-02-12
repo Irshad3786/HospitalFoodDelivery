@@ -9,7 +9,8 @@ function ManagerLogin() {
 
   const Navigate = useNavigate()
 
-  const Submit =()=>{
+  const Submit =(e)=>{
+    e.preventDefault();
     if(!Email || !Password){
       toast.warn("Fill in all fields.")
     }else{

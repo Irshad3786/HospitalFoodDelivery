@@ -15,6 +15,8 @@ import TrackMeals from './pages/TrackMeals'
 import Morning from './pages/Morning'
 import Evening from './pages/Evening'
 import Night from './pages/Night'
+import PantryLogin from './pages/PantryLogin'
+import PantryDashboard from './pages/PantryDashboard'
 
 function App() {
   const Router = createBrowserRouter([
@@ -65,6 +67,14 @@ function App() {
     {
       path:'/Night',
       element : <Night/>
+    },
+    {
+      path:'/PantryLogin',
+      element : <PantryLogin/>
+    },
+    {
+      path:'/PantryDashboard',
+      element : <PantryDashboard/>
     },
     
   ])

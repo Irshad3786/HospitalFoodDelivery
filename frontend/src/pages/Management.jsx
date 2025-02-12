@@ -16,7 +16,8 @@ function Management() {
     const [ConfPassword , setConfPassword] = useState('')
     const [Loader , setLoader] = useState(false)
 
-    const ManagerDataSubmit = ()=>{
+    const ManagerDataSubmit = (e)=>{
+        e.preventDefault();
         if(!Name || !Email || !PhoneNo || !EmpId || !Password || !ConfPassword){
             toast.info('Fill in all fields.')
         }else if(Password != ConfPassword){

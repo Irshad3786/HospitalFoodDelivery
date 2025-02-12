@@ -24,7 +24,8 @@ function AddPatient() {
 
     const navigate = useNavigate()
 
-    const PatientDataSubmit = ()=>{
+    const PatientDataSubmit = (e)=>{
+        e.preventDefault();
         if(!Name || !Diseases || !Allergies || !RoomNumber || !BedNumber || !FloorNumber || !Age || !PhoneNo || !EmergencyContact || !Gender ){
             toast.info('Fill in all fields.')
         }else{
