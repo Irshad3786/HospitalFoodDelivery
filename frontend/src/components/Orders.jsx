@@ -1,0 +1,23 @@
+import React from 'react'
+
+function Orders() {
+  return (
+    <div className='bg-slate-400 w-[90%] h-fit p-4 rounded-3xl flex justify-center items-center font-roboto'>
+        <div  className='bg-white w-[90%] h-fit rounded-3xl drop-shadow-2xl flex pt-2  flex-col items-center'>
+            <div className='bg-gray-900 h-fit rounded-2xl w-[90%] flex justify-center drop-shadow-xl  p-2 flex-col'>
+                <h1 className='text-black text-sm text-center p-2 pt-2 rounded-3xl font-semibold bg-[#00FFAA] '>Food Item</h1>
+                <div className='flex justify-center items-center p-3'>
+                    <h1 className='text-white text-base overflow-scroll'>egg with some masala padpad</h1>
+                </div>
+            </div>
+
+            <div className='p-4' >
+                <button className='bg-green-500 px-5 py-1 rounded-2xl font-outfit shadow-lg'>Accept Order</button>
+            </div>
+            
+        </div>
+    </div>
+  )
+}
+
+export default Orders
