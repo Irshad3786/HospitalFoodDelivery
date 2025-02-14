@@ -23,6 +23,8 @@ export default {
     },
   },
   plugins: [
+    require('tailwind-scrollbar-hide'),
+    require('tailwind-scrollbar'),
     plugin(function ({ addUtilities }) {
       addUtilities({
         '.font-optical-auto': {

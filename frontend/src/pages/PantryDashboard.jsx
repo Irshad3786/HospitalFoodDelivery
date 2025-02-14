@@ -1,18 +1,26 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useLocation } from "react-router-dom";
 
 function PantryDashboard() {
   const Navigate = useNavigate()
+  const location = useLocation();
+  
+  const PhoneNO = location.state
+
+ 
+  
+
   const Morning = ()=>{
-    Navigate('/MorningShift')
+    Navigate('/MorningShift',{state:PhoneNO})
   }
 
   const Evening = ()=>{
-    Navigate('/EveningShift')
+    Navigate('/EveningShift',{state:PhoneNO})
   }
 
   const Night = ()=>{
-    Navigate('/NightShift')
+    Navigate('/NightShift',{state:PhoneNO})
   }
 
   return (

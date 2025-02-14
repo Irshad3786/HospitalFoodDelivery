@@ -5,11 +5,13 @@ import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
 
 
+
 function PantryLogin() {
     const [PhoneNo , setPhoneNo] = useState('')
     const [Password , setPassword] = useState('')
 
     const Navigate = useNavigate()
+    
 
  const Submit =(e)=>{
   e.preventDefault();
@@ -20,7 +22,7 @@ function PantryLogin() {
       axios.post(`${import.meta.env.VITE_BACKEND_URL}/PantryLogin`,{PhoneNo,Password},{ withCredentials: true })
       .then((res)=>{
         if(res.data.message === "User Authenticated"){
-          Navigate('/PantryDashboard')
+          Navigate('/PantryDashboard', {state:PhoneNo})
         }
       })
       .catch((error)=>{
