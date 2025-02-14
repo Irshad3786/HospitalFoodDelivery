@@ -7,7 +7,7 @@ function Orders() {
             <div className='bg-gray-900 h-fit rounded-2xl w-[90%] flex justify-center drop-shadow-xl  p-2 flex-col'>
                 <h1 className='text-black text-sm text-center p-2 pt-2 rounded-3xl font-semibold bg-[#00FFAA] '>Food Item</h1>
                 <div className='flex justify-center items-center p-3'>
-                    <h1 className='text-white text-base overflow-scroll'>egg with some masala padpad</h1>
+                    <p className='text-white text-base max-h-20 overflow-auto'>egg with s masala padpad</p>
                 </div>
             </div>
 
