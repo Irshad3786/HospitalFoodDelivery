@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-function Orders() {
+function Orders({orders}) {
   return (
     <div className='bg-slate-400 w-[90%] h-fit p-4 rounded-3xl flex justify-center items-center font-roboto sm:w-[60%] md:w-[40%] shadow-2xl'>
         <div  className='bg-white w-[90%] h-fit rounded-3xl drop-shadow-2xl flex pt-2  flex-col items-center'>
@@ -10,7 +10,7 @@ function Orders() {
                     <h1 className='text-black text-sm text-center font-semibold'>Food Item</h1>
                 </div>
                 <div className='flex justify-center items-center p-3'>
-                    <p className='text-white text-base max-h-20 overflow-auto scrollbar-thin scrollbar-thumb-[#00FFAA] scrollbar-track-transparent'>egg with s masala pddddddddddddd hujuhughghjgjgyjhgjhgjhyhgjyhtgyhtgyhgyhgv</p>
+                    <p className='text-white text-base max-h-20 overflow-auto scrollbar-thin scrollbar-thumb-[#00FFAA] scrollbar-track-transparent'>{orders.FoodItem}  {orders.Ingredients && `with ${orders.Ingredients}`}  {orders.SpecificFoodItem && `Other Items :  ${orders.SpecificFoodItem}`}</p>
                 </div>
             </div>
 
