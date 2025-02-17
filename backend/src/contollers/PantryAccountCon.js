@@ -5,6 +5,10 @@ import { io } from '../index.js';
 export const CreatePantryAccountController = (req, res) => {
     const { PantryName, ContactInfo, Location, PantryNo, Password } = req.body;
 
+
+    if (res.headersSent) {
+        return; 
+    }
     
     PantryAccountModel.findOne({ 
         $or: [{ PhoneNo: ContactInfo }, { PantryNo: PantryNo }] 
@@ -18,7 +22,9 @@ export const CreatePantryAccountController = (req, res) => {
         return bcrypt.hash(Password, 10);
     })
     .then((hashedPassword) => {
-        
+        if (!hashedPassword){
+            return;
+        } 
         return PantryAccountModel.create({ 
             Name: PantryName, 
             PhoneNo: ContactInfo, 
@@ -34,11 +40,14 @@ export const CreatePantryAccountController = (req, res) => {
     .then((pantryData) => {
         io.emit('PantryCreated', pantryData);
 
-       
+        if (!res.headersSent) {
         res.status(201).json({ message: "Pantry Account Created Successfully" });
+        }
     })
     .catch((err) => {
         console.error(err);
+        if (!res.headersSent) {
         res.status(505).json({ message: "Internal Server Error" });
+        }
     });
 };

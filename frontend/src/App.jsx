@@ -20,6 +20,7 @@ import PantryDashboard from './pages/PantryDashboard'
 import MorningShift from './pages/MorningShift'
 import EveningShift from './pages/EveningShift'
 import NightShift from './pages/NightShift'
+import CreateDelivery from './pages/CreateDelivery'
 
 function App() {
   const Router = createBrowserRouter([
@@ -90,6 +91,10 @@ function App() {
     {
       path:'/NightShift',
       element : <NightShift/>
+    },
+    {
+      path:'CreateDelivery',
+      element : <CreateDelivery/>
     },
    
     
