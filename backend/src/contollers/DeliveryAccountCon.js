@@ -16,6 +16,7 @@ export const CreateDeliveryAccountController = (req, res) => {
     .then((existingPantry) => {
         if (existingPantry) {
             return res.status(409).json({ message: "EmergencyNo or Phone No already exists" });
+            
         }
         
         return bcrypt.hash(Password, 10);
@@ -24,9 +25,9 @@ export const CreateDeliveryAccountController = (req, res) => {
     })
     .then((hashedPassword) => {
 
-        if (!hashedPassword){
-            return;
-        } 
+        if (!hashedPassword) {
+            throw new Error("Password hashing failed"); 
+        }
         
         return DeliveryAccountModel.create({ 
             Name: Name, 
@@ -40,8 +41,8 @@ export const CreateDeliveryAccountController = (req, res) => {
      
         return DeliveryAccountModel.find({}).select('Name PhoneNo Location EmergencyNo');
     })
-    .then((pantryData) => {
-        // io.emit('PantryCreated', pantryData);
+    .then((Data) => {
+        io.emit('DeliveryCreated', Data);
 
         if (!res.headersSent) {
         res.status(201).json({ message: "Delivery Account Created Successfully" });
