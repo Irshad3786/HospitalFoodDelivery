@@ -91,7 +91,7 @@ function Card({OrderData}) {
         <h1 className='font-semibold underline text-center p-2'>Status</h1>
         
         <div className='flex flex-col justify-center items-center gap-2' >
-            <div className='flex  gap-2 bg-red-700 p-2 justify-center rounded-md text-slate-950 w-[95%] md:w-64'>
+            <div className={`flex  gap-2 ${OrderData.Status == "Order Accepted" ? 'bg-green-700' : 'bg-red-700' } p-2 justify-center rounded-md text-slate-950 w-[95%] md:w-64`}>
                 <h6 className='font-semibold'>{OrderData.Status}</h6>
             </div>
 

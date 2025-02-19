@@ -31,6 +31,9 @@ function Morning() {
 
   },[])
 
+  console.log(Orders);
+  
+
   const MorningOrders = Orders.filter((data)=>data.Shift === 'Morning')
 
 

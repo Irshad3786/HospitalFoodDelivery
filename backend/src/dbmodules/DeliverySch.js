@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { type } from "os";
 
 const DeliveryAccountSchema = new mongoose.Schema({
     Name:String,
@@ -6,6 +7,10 @@ const DeliveryAccountSchema = new mongoose.Schema({
     Location:String,
     EmergencyNo:Number,
     Password:String,
+    Status:{
+      type:String,
+      default:"Available"
+    },
     timestamp: {
         type: Date,
         default: Date.now

@@ -34,12 +34,13 @@ export const CreateDeliveryAccountController = (req, res) => {
             PhoneNo: ContactInfo, 
             Location, 
             EmergencyNo, 
-            Password: hashedPassword 
+            Password: hashedPassword,
+        
         });
     })
     .then(() => {
      
-        return DeliveryAccountModel.find({}).select('Name PhoneNo Location EmergencyNo');
+        return DeliveryAccountModel.find({}).select('Name PhoneNo Location EmergencyNo Status');
     })
     .then((Data) => {
         io.emit('DeliveryCreated', Data);
