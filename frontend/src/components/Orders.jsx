@@ -5,6 +5,9 @@ import axios from 'axios';
 
 function Orders({orders}) {
 
+
+    
+
     
     
 
@@ -13,6 +16,8 @@ function Orders({orders}) {
     const [Delivery,setDelivery] = useState([])
 
     const [DeliveryData,setDeliveryData] = useState([])
+
+
  
     
 
@@ -28,6 +33,7 @@ function Orders({orders}) {
       }, []);
 
     useEffect(() => {
+        
         axios.get(`${import.meta.env.VITE_BACKEND_URL}/GetDelivery`)
         .then((res)=>{
             console.log(res);
@@ -58,6 +64,13 @@ function Orders({orders}) {
         console.log(orders);
         
     }
+
+
+    useEffect(() => {
+        if (orders.Status === "Order Accepted") {
+            setView(true);
+        }
+    }, [orders.Status]); 
 
 
   return (
