@@ -11,6 +11,10 @@ const DeliveryAccountSchema = new mongoose.Schema({
       type:String,
       default:"Available"
     },
+    Orders: [{
+      type: Object,
+      default:{Message:"no Orders"}
+  }],
     timestamp: {
         type: Date,
         default: Date.now

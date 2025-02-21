@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import io from 'socket.io-client';
 import { useEffect } from 'react';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 
 function Orders({orders}) {
 
@@ -36,7 +37,7 @@ function Orders({orders}) {
         
         axios.get(`${import.meta.env.VITE_BACKEND_URL}/GetDelivery`)
         .then((res)=>{
-            console.log(res);
+            
             
         })
         .catch((error)=>{
@@ -60,8 +61,20 @@ function Orders({orders}) {
     }
 
     const FinalSubmit = ()=>{
-        console.log(Delivery);
-        console.log(orders);
+
+        if(Delivery.length==0){
+            toast.info('Add a Delivery')
+        }else{
+            axios.post(`${import.meta.env.VITE_BACKEND_URL}/AddOrders`,{Delivery,orders})
+            .then((res)=>{
+            
+            })
+            .catch((error)=>{
+                console.log(error);
+            })
+        }
+
+        
         
     }
 
@@ -75,6 +88,7 @@ function Orders({orders}) {
 
   return (
     <div className='bg-slate-400 w-[90%] h-fit p-4 rounded-3xl flex justify-center items-center font-roboto sm:w-[60%] md:w-[40%] shadow-2xl'>
+        <ToastContainer/>
         <div  className='bg-slate-100 w-[90%] h-fit rounded-3xl drop-shadow-2xl flex pt-2  flex-col items-center'>
             <div className='bg-gray-900 h-fit rounded-2xl w-[90%] flex justify-center drop-shadow-xl  p-2 flex-col'>
                 <div className="w-fit bg-[#00FFAA] px-4 py-1 rounded-2xl mx-auto">

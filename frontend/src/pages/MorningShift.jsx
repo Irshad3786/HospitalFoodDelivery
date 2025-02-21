@@ -23,7 +23,7 @@ function MorningShift() {
     })
   },[])
 
-  console.log(OrdersData);
+
   
   
   const morningOrder= OrdersData.filter((data)=> data.Shift === 'Morning')

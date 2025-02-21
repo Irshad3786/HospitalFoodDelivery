@@ -16,6 +16,7 @@ import OrdersAllRoute from './routes/OrdersAllRoute.js'
 import DeliveryAccountRoute from './routes/DeliveryAccountRoute.js'
 import DeliveryDataAllRoute from './routes/DeliveryDataAllRoute.js'
 import ChangeStatusRout from './routes/ChangeStatusRout.js'
+import AddOrdersRoute from './routes/AddOrdersRoute.js'
 import http from 'http';
 import { Server } from 'socket.io';  
 
@@ -68,6 +69,7 @@ app.use('/getOrders',OrdersAllRoute)
 app.use('/CreateDelivery',DeliveryAccountRoute)
 app.use('/GetDelivery',DeliveryDataAllRoute)
 app.use('/ChangeStatus',ChangeStatusRout)
+app.use('/AddOrders',AddOrdersRoute)
 
 
 const PORT = process.env.PORT || 5000;
