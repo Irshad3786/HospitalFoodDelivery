@@ -15,8 +15,12 @@ export const AddOrdersData = (req,res)=>{
               )
             DeliveryAccountModel.updateOne({PhoneNo:Delivery.PhoneNo},{"$set": {"Status": "Unavailable"}})
             .then(()=>{
-                io.emit('DeliveryCreated', [data]);
-                return  res.status(200).json({ message: 'Orders added successfully' });
+                DeliveryAccountModel.find({})
+                .then((finaldata)=>{
+                    io.emit('DeliveryCreated', finaldata);
+                    return  res.status(200).json({ message: 'Orders added successfully' });
+                })
+                
             })
         }
     })

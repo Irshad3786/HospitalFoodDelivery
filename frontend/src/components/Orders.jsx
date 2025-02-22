@@ -26,6 +26,8 @@ function Orders({orders}) {
         const socket = io(import.meta.env.VITE_BACKEND_URL);
     
         socket.on('DeliveryCreated', (DeliveryData) => {
+            console.log(DeliveryData);
+            
           setDeliveryData(DeliveryData)
         })
         return () => {
