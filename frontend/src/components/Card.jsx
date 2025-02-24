@@ -66,12 +66,12 @@ function Card({OrderData}) {
             <h1 className='font-semibold underline text-center p-2'>Delivery Person</h1>
             <div className='flex  gap-2 bg-purple-300 p-2 rounded-md text-slate-950 w-[95%] md:w-80'>
                 <h6 >Name</h6>
-                <h6 className='text-white'>Suraj</h6>
+                <h6 className='text-white'>{OrderData.DeliveryName}</h6>
             </div>
 
             <div className='flex  gap-2 bg-purple-300 p-2 rounded-md text-slate-950 w-[95%] md:w-80'>
                 <h6 >Phone No </h6>
-                <h6 className='text-white'>9963629056</h6>
+                <h6 className='text-white'>{OrderData.DeliveryPhoneNo}</h6>
             </div>
         </div>
 

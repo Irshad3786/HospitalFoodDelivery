@@ -24,6 +24,15 @@ const OrdersSchema = new mongoose.Schema({
         type:String,
         default:'Order Not Accepted'
     },
+    DeliveryName:{
+        type:String,
+        default:"N/A"
+    },
+    DeliveryPhoneNo:{
+        type:String,
+        default:"N/A"
+    },
+
     timestamp: {
         type: Date,
         default: Date.now

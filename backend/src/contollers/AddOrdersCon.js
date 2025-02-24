@@ -1,10 +1,13 @@
 import DeliveryAccountModel from "../dbmodules/DeliverySch.js";
+import OrdersModel from "../dbmodules/OrdersSch.js";
 
 import { io } from '../index.js';
 
 export const AddOrdersData = (req,res)=>{
 
     const {Delivery,orders} = req.body;
+
+    
 
     DeliveryAccountModel.findOne({PhoneNo:Delivery.PhoneNo})
     .then((data)=>{
@@ -18,7 +21,15 @@ export const AddOrdersData = (req,res)=>{
                 DeliveryAccountModel.find({})
                 .then((finaldata)=>{
                     io.emit('DeliveryCreated', finaldata);
-                    return  res.status(200).json({ message: 'Orders added successfully' });
+                    OrdersModel.updateMany({_id:orders._id},{"$set": {"DeliveryName": Delivery.Name,"DeliveryPhoneNo": Delivery.PhoneNo}})
+                    .then(()=>{
+                        OrdersModel.find({})
+                        .then((data)=>{
+                            io.emit('OrderCreated', data);
+                        })
+                        return  res.status(200).json({ message: 'Orders added successfully' });
+                    })
+                    
                 })
                 
             })
