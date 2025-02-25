@@ -12,16 +12,18 @@ export const AddOrdersData = (req,res)=>{
     DeliveryAccountModel.findOne({PhoneNo:Delivery.PhoneNo})
     .then((data)=>{
         if(data){
-            DeliveryAccountModel.updateOne(
-                { PhoneNo: Delivery.PhoneNo },
-                { $push: { Orders: orders } } 
-              )
-            DeliveryAccountModel.updateOne({PhoneNo:Delivery.PhoneNo},{"$set": {"Status": "Unavailable"}})
+            return DeliveryAccountModel.updateOne({ PhoneNo: Delivery.PhoneNo },{ $push: { Orders: orders } } )
             .then(()=>{
-                DeliveryAccountModel.find({})
+               return DeliveryAccountModel.updateOne({PhoneNo:Delivery.PhoneNo},{"$set": {"Status": "Unavailable"}})
+            })
+            .then(()=>{
+               return  DeliveryAccountModel.find({})
                 .then((finaldata)=>{
                     io.emit('DeliveryCreated', finaldata);
-                    OrdersModel.updateMany({_id:orders._id},{"$set": {"DeliveryName": Delivery.Name,"DeliveryPhoneNo": Delivery.PhoneNo}})
+                    return  OrdersModel.updateMany({_id:orders._id},{"$set": {"DeliveryName": Delivery.Name,"DeliveryPhoneNo": Delivery.PhoneNo}})
+                    .then(()=>{
+                        return OrdersModel.updateOne({_id:orders._id},{"$set": {"Status": "Yet to Deliver"}})
+                    })
                     .then(()=>{
                         OrdersModel.find({})
                         .then((data)=>{

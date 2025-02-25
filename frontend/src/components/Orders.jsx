@@ -8,14 +8,14 @@ function Orders({orders}) {
 
 
     
-
     
     
-
+    
+    
+    const [OrderCompleted , setOrderCompleted] = useState(false)
     const [view,setView]=useState(false)
     const [viewTwo,setViewTwo]=useState(false)
     const [Delivery,setDelivery] = useState([])
-
     const [DeliveryData,setDeliveryData] = useState([])
 
 
@@ -26,9 +26,10 @@ function Orders({orders}) {
         const socket = io(import.meta.env.VITE_BACKEND_URL);
     
         socket.on('DeliveryCreated', (DeliveryData) => {
-            console.log(DeliveryData);
-            
+           
           setDeliveryData(DeliveryData)
+
+          
         })
         return () => {
           socket.off('DeliveryCreated');
@@ -39,8 +40,7 @@ function Orders({orders}) {
         
         axios.get(`${import.meta.env.VITE_BACKEND_URL}/GetDelivery`)
         .then((res)=>{
-            
-            
+
         })
         .catch((error)=>{
             console.log(error);
@@ -69,21 +69,37 @@ function Orders({orders}) {
         }else{
             axios.post(`${import.meta.env.VITE_BACKEND_URL}/AddOrders`,{Delivery,orders})
             .then((res)=>{
+                if(res){
+                    setOrderCompleted(true)
+                }
             
             })
             .catch((error)=>{
                 console.log(error);
             })
+
+            
+           
         }
 
+
+        
         
         
     }
 
 
     useEffect(() => {
-        if (orders.Status === "Order Accepted") {
+        if (orders.Status === "Order Accepted" || orders.Status === "Yet to Deliver" ) {
             setView(true);
+        }
+    }, [orders.Status]); 
+
+
+    useEffect(() => {
+
+        if (orders.Status === "Yet to Deliver" ) {
+            setOrderCompleted(true)
         }
     }, [orders.Status]); 
 
@@ -101,11 +117,11 @@ function Orders({orders}) {
                 </div>
             </div>
 
-           {view &&  (<div className='p-6'>
+           {!OrderCompleted && view &&  (<div className='p-6'>
             <h1 className='text-black text-sm  md:text-lg text-center font-semibold underline' >Select Delivery</h1>
            </div>)}
 
-            {view && (<div className='bg-white shadow-md  max-h-44 overflow-y-scroll scrollbar-thin scrollbar-thumb-[#00FFAA] scrollbar-track-transparent'>
+            {!OrderCompleted && view && (<div className='bg-white shadow-md  max-h-44 overflow-y-scroll scrollbar-thin scrollbar-thumb-[#00FFAA] scrollbar-track-transparent'>
             <table className='min-w-full table-auto border-collapse font-roboto text-xs sm:text-base md:text-base '>
             <thead>
                 <tr className="bg-gray-200">
@@ -135,11 +151,13 @@ function Orders({orders}) {
 
         </div>)}
 
-        {view && viewTwo &&(<div className='p-6'>
+        {!OrderCompleted && view && viewTwo &&(<div className='p-6'>
             <h1 className='text-black text-sm  md:text-lg text-center font-semibold underline' >Selected Delivery</h1>
         </div>)}
 
-        {view && viewTwo &&(<div className=' w-[100%] h-fit flex justify-center items-center pt-3 '>
+
+
+        {!OrderCompleted && view && viewTwo &&(<div className=' w-[100%] h-fit flex justify-center items-center pt-3 '>
 
         <table className='bg-green-100 font-roboto text-xs sm:text-base md:text-base'>
             <thead>
@@ -159,8 +177,34 @@ function Orders({orders}) {
         </table>
         </div>)}
 
+
+        {OrderCompleted && (<div className='p-6'>
+            <h1 className='text-black text-sm  md:text-lg text-center font-semibold underline' >Selected Delivery</h1>
+        </div>)}
+
+       {OrderCompleted && (<div className=' w-[100%] h-fit flex justify-center items-center pt-3 '>
+        
+        <table className='bg-green-100 font-roboto text-xs sm:text-base md:text-base'>
+            <thead>
+                <tr>
+                <th className='px-2  border sm:py-2 md:px-4 md:py-2 py-1'>Name hii</th>
+                <th className='px-2  border sm:py-2 md:px-4 md:py-2 py-1'>PhoneNo</th>
+                
+                </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td className='px-2  border sm:py-2 md:px-4 md:py-2 py-1'>{orders.DeliveryName}</td>
+                <td className='px-2  border sm:py-2 md:px-4 md:py-2 py-1'>{orders.DeliveryPhoneNo}</td>
+               
+            </tr>
+            </tbody>
+        </table>
+        </div>)}
+
+
         {view && (<div className='p-4' >
-                <button className='bg-green-500 px-5 py-3 rounded-2xl font-outfit shadow-lg hover:bg-lime-400' onClick={FinalSubmit}>Order Completed</button>
+                {OrderCompleted ?<button className='bg-amber-400 px-5 py-3 rounded-2xl font-outfit shadow-lg ' >Order yet to deliver</button>:<button className='bg-green-500 px-5 py-3 rounded-2xl font-outfit shadow-lg hover:bg-lime-400' onClick={FinalSubmit}>Order Completed</button>}
         </div>)}
         {!view && (<div className='p-4' >
                 <button className='bg-green-500 px-5 py-1 rounded-2xl font-outfit shadow-lg hover:bg-lime-400' onClick={OrderAccept}>Accept Order</button>
