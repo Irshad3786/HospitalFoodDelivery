@@ -21,6 +21,8 @@ import MorningShift from './pages/MorningShift'
 import EveningShift from './pages/EveningShift'
 import NightShift from './pages/NightShift'
 import CreateDelivery from './pages/CreateDelivery'
+import DeliveryLogin from './pages/DeliveryLogin'
+import DeliveryDashboard from './pages/DeliveryDashboard'
 
 function App() {
   const Router = createBrowserRouter([
@@ -95,6 +97,14 @@ function App() {
     {
       path:'CreateDelivery',
       element : <CreateDelivery/>
+    },
+    {
+      path:'DeliveryLogin',
+      element : <DeliveryLogin/>
+    },
+    {
+      path:'DeliveryDashboard',
+      element : <DeliveryDashboard/>
     },
    
     

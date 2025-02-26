@@ -8,10 +8,6 @@ function Orders({orders}) {
 
 
     
-    
-    
-    
-    
     const [OrderCompleted , setOrderCompleted] = useState(false)
     const [view,setView]=useState(false)
     const [viewTwo,setViewTwo]=useState(false)
@@ -27,6 +23,8 @@ function Orders({orders}) {
     
         socket.on('DeliveryCreated', (DeliveryData) => {
            
+        
+            
           setDeliveryData(DeliveryData)
 
           
@@ -101,7 +99,9 @@ function Orders({orders}) {
         if (orders.Status === "Yet to Deliver" ) {
             setOrderCompleted(true)
         }
+
     }, [orders.Status]); 
+
 
 
   return (
@@ -178,33 +178,9 @@ function Orders({orders}) {
         </div>)}
 
 
-        {OrderCompleted && (<div className='p-6'>
-            <h1 className='text-black text-sm  md:text-lg text-center font-semibold underline' >Selected Delivery</h1>
-        </div>)}
-
-       {OrderCompleted && (<div className=' w-[100%] h-fit flex justify-center items-center pt-3 '>
-        
-        <table className='bg-green-100 font-roboto text-xs sm:text-base md:text-base'>
-            <thead>
-                <tr>
-                <th className='px-2  border sm:py-2 md:px-4 md:py-2 py-1'>Name hii</th>
-                <th className='px-2  border sm:py-2 md:px-4 md:py-2 py-1'>PhoneNo</th>
-                
-                </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td className='px-2  border sm:py-2 md:px-4 md:py-2 py-1'>{orders.DeliveryName}</td>
-                <td className='px-2  border sm:py-2 md:px-4 md:py-2 py-1'>{orders.DeliveryPhoneNo}</td>
-               
-            </tr>
-            </tbody>
-        </table>
-        </div>)}
-
 
         {view && (<div className='p-4' >
-                {OrderCompleted ?<button className='bg-amber-400 px-5 py-3 rounded-2xl font-outfit shadow-lg ' >Order yet to deliver</button>:<button className='bg-green-500 px-5 py-3 rounded-2xl font-outfit shadow-lg hover:bg-lime-400' onClick={FinalSubmit}>Order Completed</button>}
+                {OrderCompleted ?<h1 className='bg-amber-400 px-5 py-3  font-outfit shadow-lg ' >Order yet to deliver</h1>:<button className='bg-green-500 px-5 py-3 rounded-2xl font-outfit shadow-lg hover:bg-lime-400' onClick={FinalSubmit}>Order Completed</button>}
         </div>)}
         {!view && (<div className='p-4' >
                 <button className='bg-green-500 px-5 py-1 rounded-2xl font-outfit shadow-lg hover:bg-lime-400' onClick={OrderAccept}>Accept Order</button>
