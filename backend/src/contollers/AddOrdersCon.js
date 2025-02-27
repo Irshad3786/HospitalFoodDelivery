@@ -7,8 +7,6 @@ export const AddOrdersData = (req,res)=>{
 
     const {Delivery,orders} = req.body;
 
-    
-
     DeliveryAccountModel.findOne({PhoneNo:Delivery.PhoneNo})
     .then((data)=>{
         if(data){
@@ -28,6 +26,12 @@ export const AddOrdersData = (req,res)=>{
                         OrdersModel.find({})
                         .then((data)=>{
                             io.emit('OrderCreated', data);
+                        })
+                        .then(()=>{
+                            DeliveryAccountModel.findOne({PhoneNo:Number(Delivery.PhoneNo)})
+                            .then((data)=>{
+                                io.emit('OrderData', data);
+                            })
                         })
                         return  res.status(200).json({ message: 'Orders added successfully' });
                     })
