@@ -6,8 +6,13 @@ import { io } from 'socket.io-client';
 
 function DeliveryCard({Phonenumber}) {
 
+    const [ChangeStatus , setChangeStatus] = useState(false)
+    const [DeliveryData, setDeliverydata] = useState({ Orders: [{}] });
+
+    console.log(DeliveryData);
     
-    const [DeliveryData,setDeliverydata] = useState([])
+
+    
 
     useEffect(()=>{
         axios.post(`${import.meta.env.VITE_BACKEND_URL}/DeliveryData`,{PhoneNo:Phonenumber})
@@ -33,6 +38,18 @@ function DeliveryCard({Phonenumber}) {
         };
       }, []);
 
+      const AcceptDelivery = ()=>{
+        axios.post(`${import.meta.env.VITE_BACKEND_URL}/ChangeDeliveryStatus`,{_id:DeliveryData?.Orders[0]?._id})
+        .then((data)=>{
+            setChangeStatus(true)
+        })
+        .catch((error)=>{
+          console.log(error);
+        })
+
+        
+      }
+
 
       
       
@@ -46,7 +63,7 @@ function DeliveryCard({Phonenumber}) {
                     <h1 className='text-black text-sm text-center font-semibold'>Food Item</h1>
                 </div>
                 <div className='flex justify-center items-center p-3'>
-                    <p className='text-white text-base max-h-20 overflow-auto scrollbar-thin scrollbar-thumb-[#00FFAA] scrollbar-track-transparent'>{DeliveryData.Orders[0].FoodItem}</p>
+                    <p className='text-white text-base max-h-20 overflow-auto scrollbar-thin scrollbar-thumb-[#00FFAA] scrollbar-track-transparent'>{DeliveryData?.Orders[0]?.FoodItem}</p>
                 </div>
             </div>
 
@@ -67,12 +84,12 @@ function DeliveryCard({Phonenumber}) {
             </thead>
             <tbody>
                         <tr  className="hover:bg-gray-300 cursor-pointer">
-                            <td className="px-2 sm:px-4 sm:py-2 md:px-4 md:py-2 py-1 border">{DeliveryData.Orders[0].Patient.Name}</td>
-                            <td className="px-2 sm:px-4 sm:py-2 md:px-4 md:py-2 py-1 border">{DeliveryData.Orders[0].Patient.PhoneNo}</td>
-                            <td className="px-2 sm:px-4 sm:py-2 md:px-4 md:py-2 py-1 border">{DeliveryData.Orders[0].Patient.FloorNumber}</td>
-                            <td className="px-2 sm:px-4 sm:py-2 md:px-4 md:py-2 py-1 border ">{DeliveryData.Orders[0].Patient.RoomNumber
+                            <td className="px-2 sm:px-4 sm:py-2 md:px-4 md:py-2 py-1 border">{DeliveryData?.Orders[0]?.Patient?.Name}</td>
+                            <td className="px-2 sm:px-4 sm:py-2 md:px-4 md:py-2 py-1 border">{DeliveryData?.Orders[0]?.Patient?.PhoneNo}</td>
+                            <td className="px-2 sm:px-4 sm:py-2 md:px-4 md:py-2 py-1 border">{DeliveryData?.Orders[0]?.Patient?.FloorNumber}</td>
+                            <td className="px-2 sm:px-4 sm:py-2 md:px-4 md:py-2 py-1 border ">{DeliveryData?.Orders[0]?.Patient?.RoomNumber
                             }</td>
-                            <td className="px-2 sm:px-4 sm:py-2 md:px-4 md:py-2 py-1 border ">{DeliveryData.Orders[0].Patient.BedNumber}</td>
+                            <td className="px-2 sm:px-4 sm:py-2 md:px-4 md:py-2 py-1 border ">{DeliveryData?.Orders[0]?.Patient?.BedNumber}</td>
                         </tr>
             </tbody>
             </table>
@@ -95,9 +112,9 @@ function DeliveryCard({Phonenumber}) {
             </thead>
             <tbody>
                         <tr  className="hover:bg-gray-300 cursor-pointer">
-                            <td className="px-2 sm:px-4 sm:py-2 md:px-4 md:py-2 py-1 border">{DeliveryData.Orders[0].Pantry.Name}</td>
-                            <td className="px-2 sm:px-4 sm:py-2 md:px-4 md:py-2 py-1 border">{DeliveryData.Orders[0].Pantry.PhoneNo}</td>
-                            <td className="px-2 sm:px-4 sm:py-2 md:px-4 md:py-2 py-1 border ">{DeliveryData.Orders[0].Pantry.Location}</td>
+                            <td className="px-2 sm:px-4 sm:py-2 md:px-4 md:py-2 py-1 border">{DeliveryData?.Orders[0]?.Pantry?.Name}</td>
+                            <td className="px-2 sm:px-4 sm:py-2 md:px-4 md:py-2 py-1 border">{DeliveryData?.Orders[0]?.Pantry?.PhoneNo}</td>
+                            <td className="px-2 sm:px-4 sm:py-2 md:px-4 md:py-2 py-1 border ">{DeliveryData?.Orders[0]?.Pantry?.Location}</td>
                         </tr>
             </tbody>
             </table>
@@ -106,7 +123,7 @@ function DeliveryCard({Phonenumber}) {
 
 
         <div className='p-4' >
-                <button className='bg-green-500 px-5 py-1 rounded-2xl font-outfit shadow-lg hover:bg-lime-400' >Accept Order</button>
+                {ChangeStatus ?<button className='bg-green-500 px-5 py-1 rounded-2xl font-outfit shadow-lg hover:bg-lime-400' >Delivery completed </button> :<button className='bg-red-500 px-5 py-1 rounded-2xl font-outfit shadow-lg hover:bg-lime-400' onClick={AcceptDelivery} >Accept Order</button>}
         </div>
             
         </div>

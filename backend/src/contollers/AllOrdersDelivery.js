@@ -5,6 +5,7 @@ export const DeliveryOrdersData = (req,res)=>{
 
     const {PhoneNo} = req.body
 
+
     DeliveryAccountModel.findOne({PhoneNo:Number(PhoneNo)})
     .then((data)=>{
         io.emit('OrderData', data);
