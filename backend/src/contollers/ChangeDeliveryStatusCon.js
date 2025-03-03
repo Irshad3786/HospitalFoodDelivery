@@ -7,7 +7,6 @@ export const ChangeDeliveryStatusController =  (req,res)=>{
 
         OrdersModel.updateOne({_id:_id},{"$set": {"Status": "Order accepted, out for delivery."}})
         .then((data)=>{
-
             if(data){
                 OrdersModel.find({})
                 .then((dataval)=>{
@@ -17,7 +16,7 @@ export const ChangeDeliveryStatusController =  (req,res)=>{
                     console.log(error);
                 })
                 
-                return res.status(505).json({message:"Order Status Changed Successfully"})
+                return res.status(200).json({message:"Order Status Changed Successfully"})
             }
         })
         .catch(()=>{

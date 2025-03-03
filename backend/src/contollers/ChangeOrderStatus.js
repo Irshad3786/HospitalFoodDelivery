@@ -17,7 +17,7 @@ export const ChangeOrderStatusController =  (req,res)=>{
                     console.log(error);
                 })
                 
-                return res.status(505).json({message:"Order Status Changed Successfully"})
+                return res.status(200).json({message:"Order Status Changed Successfully"})
             }
         })
         .catch(()=>{

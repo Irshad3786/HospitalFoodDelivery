@@ -9,7 +9,28 @@ function DeliveryCard({Phonenumber}) {
     const [ChangeStatus , setChangeStatus] = useState(false)
     const [DeliveryData, setDeliverydata] = useState({ Orders: [{}] });
 
-    console.log(DeliveryData);
+    
+    
+    
+
+    useEffect(()=>{
+        if(DeliveryData?.Orders[0]?._id){
+            axios.post(`${import.meta.env.VITE_BACKEND_URL}/CheckStatusDelivery`,{idData:DeliveryData?.Orders[0]?._id})
+            .then((data)=>{
+                
+             if(data.data.data.Status == "Order accepted, out for delivery."){
+
+                setChangeStatus(true)
+             }
+          
+            })
+            .catch((error)=>{
+                console.log(error);
+                })
+            }
+
+    },[DeliveryData])
+
     
 
     
@@ -23,6 +44,9 @@ function DeliveryCard({Phonenumber}) {
           console.log(error);
         })
        },[])
+
+
+    
 
 
     useEffect(() => {
@@ -41,12 +65,14 @@ function DeliveryCard({Phonenumber}) {
       const AcceptDelivery = ()=>{
         axios.post(`${import.meta.env.VITE_BACKEND_URL}/ChangeDeliveryStatus`,{_id:DeliveryData?.Orders[0]?._id})
         .then((data)=>{
-            setChangeStatus(true)
+            if(data){ 
+                setChangeStatus(true)
+            }
         })
         .catch((error)=>{
           console.log(error);
         })
-
+       
         
       }
 
