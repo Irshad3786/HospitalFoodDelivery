@@ -8,8 +8,9 @@ function DeliveryCard({Phonenumber}) {
 
     const [ChangeStatus , setChangeStatus] = useState(false)
     const [DeliveryData, setDeliverydata] = useState({ Orders: [{}] });
-
+    const [Main , setMain] = useState(false)
     
+
     
     
 
@@ -55,6 +56,7 @@ function DeliveryCard({Phonenumber}) {
         socket.on('OrderData', (data) => {
           
           setDeliverydata(data)
+          
         });
       
         return () => {
@@ -71,17 +73,36 @@ function DeliveryCard({Phonenumber}) {
         })
         .catch((error)=>{
           console.log(error);
-        })
-       
+        })}
+
+
+        const DeliveryCompleted = ()=>{
+            axios.post(`${import.meta.env.VITE_BACKEND_URL}/OrderDelivered`,{_id:DeliveryData?.Orders[0]?._id , deliveryid:DeliveryData._id})
+            .then((data)=>{
+                console.log(data);
+                
+            })
+            .catch((error)=>{
+                console.log(error);
+            })
+        }
+
         
-      }
 
-
+        useEffect(()=>{
+            if(DeliveryData.Orders.length === 0){
+                setMain(true)
+                
+            }
+        }
+            
+        ,[DeliveryData.Orders])
       
       
     
   return (
-    <div className='bg-slate-400 w-[90%] h-fit p-4 rounded-3xl flex justify-center items-center font-roboto sm:w-[60%] md:w-[40%] shadow-2xl'>
+    <>
+    {!Main ? (<div className='bg-slate-400 w-[90%] h-fit p-4 rounded-3xl flex justify-center items-center font-roboto sm:w-[60%] md:w-[40%] shadow-2xl'>
         <ToastContainer/>
         <div  className='bg-slate-100 w-[90%] h-[100%] rounded-3xl drop-shadow-2xl flex pt-2  flex-col items-center'>
             <div className='bg-gray-900 h-fit rounded-2xl w-[90%] flex justify-center drop-shadow-xl  p-2 flex-col'>
@@ -149,11 +170,14 @@ function DeliveryCard({Phonenumber}) {
 
 
         <div className='p-4' >
-                {ChangeStatus ?<button className='bg-green-500 px-5 py-1 rounded-2xl font-outfit shadow-lg hover:bg-lime-400' >Delivery completed </button> :<button className='bg-red-500 px-5 py-1 rounded-2xl font-outfit shadow-lg hover:bg-lime-400' onClick={AcceptDelivery} >Accept Order</button>}
+                {ChangeStatus ?<button className='bg-green-500 px-5 py-1 rounded-2xl font-outfit shadow-lg hover:bg-lime-400' onClick={DeliveryCompleted} >Delivery completed </button> :<button className='bg-red-500 px-5 py-1 rounded-2xl font-outfit shadow-lg hover:bg-lime-400' onClick={AcceptDelivery} >Accept Order</button>}
         </div>
             
         </div>
-    </div>
+    </div>) : <div className='font-roboto flex justify-center items-center text-2xl h-96 w-[100%]'>
+        <h1>No Orders Found</h1>
+        </div>}
+    </>
   )
 }
 
