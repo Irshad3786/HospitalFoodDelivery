@@ -9,8 +9,11 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        roboto: ['"Roboto"', 'sans-serif'],
-        outfit: ['"Outfit"', 'serif'],
+        roboto: ['Roboto', 'sans-serif'],
+        outfit: ['Outfit', 'serif'],
+        Dangrek:["Dangrek", 'sans-serif'],
+        Varela:["Varela Round", 'sans-serif'],
+        Playwrite:["Playwrite AU NSW"," cursive"]
       },
       fontWeight: {
         thin: 100,

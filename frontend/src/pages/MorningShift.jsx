@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Orders from '../components/Orders'
 import { useLocation } from "react-router-dom";
 import axios from 'axios'
+import { io } from 'socket.io-client';
+
 
 function MorningShift() {
   const [OrdersData , setOrdersData] = useState([])
@@ -15,13 +17,31 @@ function MorningShift() {
   useEffect(()=>{
     axios.post(`${import.meta.env.VITE_BACKEND_URL}/getOrders`,{PhoneNo})
     .then((res)=>{
-      setOrdersData(res.data.data)
+      
     })
     .catch((error)=>{
       console.log(error);
       
     })
   },[])
+
+
+  useEffect(()=>{
+
+    const socket = io(import.meta.env.VITE_BACKEND_URL);
+
+    socket.on('GetAllOrders', (Orders) => {
+      console.log(Orders);
+      
+      setOrdersData(Orders)
+    })
+    
+    return () => {
+      socket.off('OrderCreated');
+    }
+
+  },[])
+
 
 
   

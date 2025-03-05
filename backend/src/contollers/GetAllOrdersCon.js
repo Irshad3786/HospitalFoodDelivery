@@ -7,11 +7,7 @@ export const GetALLOrdersController =  (req,res)=>{
 
         OrdersModel.find({"Pantry.PhoneNo":Number(PhoneNo)})
         .then((data)=>{
-            if(data){
-                return res.status(200).json({message:"orders found",data:data})
-            } else {
-                return res.status(404).json({ message: "No orders found" });
-            }
+            io.emit('GetAllOrders', data);
         })
         .catch(()=>{
             console.log(err);

@@ -10,6 +10,11 @@ export const CreateOrderController =  (req,res)=>{
             OrdersModel.find({})
             .then((data)=>{
                 io.emit('OrderCreated', data);
+                OrdersModel.find({"Pantry.PhoneNo":Number(PantrySelected.PhoneNo)})
+                .then((dataone)=>{
+                    io.emit('GetAllOrders', dataone);
+                })
+
             })
             .catch((error)=>{
                 console.log(error)

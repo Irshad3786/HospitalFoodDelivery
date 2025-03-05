@@ -20,6 +20,12 @@ export const DeliveryCompletedControler =  (req,res)=>{
                     .then((data)=>{
                         io.emit('OrderData', data);
                     })
+
+                    OrdersModel.find({})
+                    .then((data)=>{
+                        io.emit('GetAllOrders', data);
+                    })
+
                 })
 
                 if(data){
