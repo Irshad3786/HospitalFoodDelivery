@@ -10,6 +10,7 @@ function Home() {
     const [menttwo , setmenutwo] = useState(false)
 
     const quote = useRef()
+    const dishref = useRef()
 
     const Login =()=>{
         setmenu(!menu)
@@ -32,6 +33,16 @@ function Home() {
             onComplete: () => {
                 quote.current.style.pointerEvents = "auto"; 
             }
+        })
+    })
+
+    useGSAP(()=>{
+        gsap.to(dish.current,{
+            rotate: 360,
+            repeat: -1,
+            duration: 9,
+            ease: "linear",
+            transformOrigin: "center center"
         })
     })
 
@@ -74,18 +85,21 @@ function Home() {
             <h1 className='font-outfit text-5xl text-center'>Fueling your recovery with wholesome meals, delivered with love.</h1>
         </div>
 
-        <div className='flex justify-center gap-96 p-6'>
-            <div className='w-72 '>
-                <img src={dish}/>
+        <div className='flex justify-center items-center sm:items-start md:items-start flex-col space-y-20 sm:flex-row py-8 px-4 sm:gap-28 md:gap-48'>
+            <div className='flex items-center justify-center' >
+                <div className='w-44 sm:w-60 md:w-72 flex items-center '  >
+                    <img src={dish} ref={dishref} />
+                </div>
             </div>
-            <div className='flex flex-col justify-center items-center font-Varela  text-xl'>
+            <div className='font-Varela font-bold gap-4 md:text-xl md:gap-8'>
                 <h1>• Healing Meals, Delivered in No Time! </h1>
                 <h1>• Fueling Recovery with Every Bite!</h1>
                 <h1>• Nutritious, Delicious, and Full of Care!</h1>
-                <h1>• More Than Just Food – It’s Care in Every Bite!</h1>
+                <h1>• More Than Just Food - It's Care in Every Bite!</h1>
             </div>
         </div>
     </div>
+    
   )
 }
 

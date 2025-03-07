@@ -4,7 +4,7 @@ import { io } from '../index.js';
 
 export const DeliveryCompletedControler =  (req,res)=>{
     
-        const {_id,deliveryid} = req.body
+        const {_id,deliveryid,Phone} = req.body
         
         OrdersModel.deleteOne({_id:_id})
         .then(()=>{
@@ -20,11 +20,15 @@ export const DeliveryCompletedControler =  (req,res)=>{
                     .then((data)=>{
                         io.emit('OrderData', data);
                     })
-
                     OrdersModel.find({})
                     .then((data)=>{
                         io.emit('GetAllOrders', data);
                     })
+                    DeliveryAccountModel.updateOne({PhoneNo:Phone},{"$set": {"Status": "Available"}})
+                    .then(()=>{
+
+                    })
+                    
 
                 })
 

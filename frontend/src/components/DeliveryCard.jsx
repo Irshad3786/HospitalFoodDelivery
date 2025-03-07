@@ -9,6 +9,9 @@ function DeliveryCard({Phonenumber}) {
     const [ChangeStatus , setChangeStatus] = useState(false)
     const [DeliveryData, setDeliverydata] = useState({ Orders: [{}] });
     const [Main , setMain] = useState(false)
+
+    console.log(DeliveryData);
+    
     
 
     
@@ -44,7 +47,7 @@ function DeliveryCard({Phonenumber}) {
         .catch((error)=>{
           console.log(error);
         })
-       },[])
+    },[])
 
 
     
@@ -54,6 +57,7 @@ function DeliveryCard({Phonenumber}) {
         const socket = io(import.meta.env.VITE_BACKEND_URL);
     
         socket.on('OrderData', (data) => {
+          console.log(data);
           
           setDeliverydata(data)
           
@@ -77,7 +81,7 @@ function DeliveryCard({Phonenumber}) {
 
 
         const DeliveryCompleted = ()=>{
-            axios.post(`${import.meta.env.VITE_BACKEND_URL}/OrderDelivered`,{_id:DeliveryData?.Orders[0]?._id , deliveryid:DeliveryData._id})
+            axios.post(`${import.meta.env.VITE_BACKEND_URL}/OrderDelivered`,{_id:DeliveryData?.Orders[0]?._id , deliveryid:DeliveryData._id , Phone:Phonenumber})
             .then((data)=>{
                 console.log(data);
                 
