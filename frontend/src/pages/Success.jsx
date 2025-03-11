@@ -50,7 +50,7 @@ function Success() {
         </div>
 
         <div ref={successthree}>
-            <button className='bg-white p-2 shadow-lg rounded-lg px-3 font-roboto hover:bg-gray-500' onClick={()=>{
+            <button className='bg-white p-2 shadow-lg rounded-lg px-3 font-roboto hover:bg-gray-500 border border-black' onClick={()=>{
                 Navigate('/ManagerLogin')
             }}>Proceed to Login</button>
         </div>
