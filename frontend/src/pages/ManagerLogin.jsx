@@ -2,10 +2,12 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { Form, Link, useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
+import { DNA } from 'react-loader-spinner'
 
 function ManagerLogin() {
   const [Email , setEmail] = useState('')
   const [Password , setPassword] = useState('')
+  const [Spinner , setSpinner] = useState(false)
 
   const Navigate = useNavigate()
 
@@ -14,9 +16,11 @@ function ManagerLogin() {
     if(!Email || !Password){
       toast.warn("Fill in all fields.")
     }else{
+      setSpinner(true)
       axios.post(`${import.meta.env.VITE_BACKEND_URL}/ManagerLogin`,{Email,Password},{ withCredentials: true })
       .then((res)=>{
         if(res.data.message === "User Authenticated"){
+          setSpinner(false)
           Navigate('/ManagerDashboard')
         }
       })
@@ -28,7 +32,7 @@ function ManagerLogin() {
   
   return (
     <div>
-      <div className='bg-[#00FFAA] w-[100%] h-screen pt-32'>
+      <div className={`bg-[#00FFAA] w-[100%] h-screen pt-32 `}>
       <ToastContainer/>
         <h1 className='text-center pt-10 text-xl font-Varela font-bold sm:text-2xl md:text-3xl'>Manager Dashboard Login</h1>
         <Form onSubmit={Submit} >
@@ -47,6 +51,14 @@ function ManagerLogin() {
             </div>
         </Form>
         <h6 className='text-center pt-7 font-Varela'>Don't have an account ?<Link to='/CreateAccount' className='text-sky-950 font-mono  p-2 rounded-lg font-semibold underline'>CreateAccount </Link></h6>
+          {Spinner && (<div> 
+            <div className="fixed inset-0 flex flex-col justify-center items-center bg-black bg-opacity-90 z-50">
+            <DNA visible={true} height="180" width="180" ariaLabel="dna-loading" />
+            <h1 className='font-Varela text-xl text-white'>Loading... Please Wait</h1>
+            </div>
+          </div>
+        )}
+
       </div>
     </div>
   )
