@@ -1,5 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
+
+
 
 function ManagerDashboard() {
 
@@ -20,6 +23,23 @@ function ManagerDashboard() {
     const TrackMealsFun=()=>{
         Navigate('/TrackMeals')
     }
+
+    useEffect(()=>{
+        axios.get(`${import.meta.env.VITE_BACKEND_URL}/VerifyManager`,{ withCredentials: true })
+        .then((res)=>{
+            console.log(res.data.message);
+            
+            if(res.data.message === 'authorized User'){
+                
+            }else if(res.data.message === 'No Token Found'){
+                Navigate('/ManagerLogin')
+            }
+            
+        })
+        .catch((error)=>{
+
+        })
+    },[])
 
 
   return (
@@ -44,9 +64,7 @@ function ManagerDashboard() {
             </div>
 
             <div className='flex justify-center items-center w-[100%] h-[85%]'>
-                <h1>
-                    Welcome Irshad
-                </h1>
+                <h1>Hello</h1>
             </div>
         </div>
     </div>
