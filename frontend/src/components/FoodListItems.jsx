@@ -197,10 +197,10 @@ function FoodListItems({searchTerm , onSelectFood}) {
   return (
     <div>
         <div className='bg-white shadow-md  max-h-44 overflow-y-scroll '>
-        <table className='min-w-full table-auto border-collapse font-roboto text-xs sm:text-base md:text-base'>
+        <table className='min-w-full table-auto border-collapse font-Varela text-xs sm:text-base md:text-base'>
             <thead>
                 <tr className="bg-gray-200">
-                    <th className="px-2 sm:px-4 sm:py-2 md:px-4 md:py-2 py-1 border">FOOD ITEMS</th>
+                    <th className="px-2 sm:px-4 sm:py-2 md:px-4 md:py-2 py-1 border bg-[#00FFAA] ">FOOD ITEMS</th>
                 </tr>
             </thead>
             <tbody>
