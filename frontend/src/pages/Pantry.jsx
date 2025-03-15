@@ -5,6 +5,7 @@ import { Form } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { DNA } from 'react-loader-spinner'
 
 function Pantry() {
         const Navigate = useNavigate()
@@ -14,6 +15,7 @@ function Pantry() {
       const [PantryNo , setPantryNo] = useState('')
       const [Password , setPassword ]= useState('')
       const [ConfirmPassword , setConfirmPassword] = useState('')
+      const [Spinner,setSpinner] = useState(false)
 
 
       useEffect(()=>{
@@ -42,9 +44,11 @@ function Pantry() {
         }else if(Password != ConfirmPassword ){
             toast.info('Confirm Password is Not Correct')
         }else{
+            setSpinner(true)
             axios.post(`${import.meta.env.VITE_BACKEND_URL}/CreatePantry`,{PantryName,ContactInfo,Location,PantryNo,Password})
             .then((res)=>{
                 if(res.data.message === 'Pantry Account Created Successfully'){
+                    setSpinner(false)
                     toast.success('Pantry Created Successfully')
                     setPantryName('')
                     setContactInfo('')
@@ -91,6 +95,13 @@ function Pantry() {
                 </div>
             </Form>
             </div>
+            {Spinner && (<div> 
+                                            <div className="fixed inset-0 flex flex-col justify-center items-center bg-black bg-opacity-90 z-50">
+                                            <DNA visible={true} height="180" width="180" ariaLabel="dna-loading" />
+                                            <h1 className='font-Varela text-xl text-white'>Adding Pantry... Please Wait</h1>
+                                            </div>
+                                          </div>
+                                        )}
         </div>
     </div>
   )

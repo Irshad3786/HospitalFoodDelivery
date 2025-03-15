@@ -4,6 +4,7 @@ import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'
+import { DNA } from 'react-loader-spinner'
 
 
 
@@ -21,6 +22,7 @@ function AddPatient() {
     const [PhoneNo , setPhoneNo] = useState('')
     const [EmergencyContact ,setEmergencyContact] = useState('')
     const [Gender , setGender] = useState('')
+     const [Spinner,setSpinner] = useState(false)
 
 
     useEffect(()=>{
@@ -49,9 +51,11 @@ function AddPatient() {
         if(!Name || !Diseases || !Allergies || !RoomNumber || !BedNumber || !FloorNumber || !Age || !PhoneNo || !EmergencyContact || !Gender ){
             toast.info('Fill in all fields.')
         }else{
+            setSpinner(true)
             axios.post(`${import.meta.env.VITE_BACKEND_URL}/CreatePatient`,{Name,Diseases,Allergies,RoomNumber,BedNumber,FloorNumber,Age,PhoneNo,EmergencyContact,Gender})
             .then((res)=>{
                 if(res.data.message === 'Patient Account Created Successfully'){
+                    setSpinner(false)
                     toast.success('Patient Created Successfully')
                     setName('')
                     setDiseases('')
@@ -120,6 +124,13 @@ function AddPatient() {
                 </div>
             </Form>
             </div>
+            {Spinner && (<div> 
+                                <div className="fixed inset-0 flex flex-col justify-center items-center bg-black bg-opacity-90 z-50">
+                                <DNA visible={true} height="180" width="180" ariaLabel="dna-loading" />
+                                <h1 className='font-Varela text-xl text-white'>Adding Patient... Please Wait</h1>
+                                </div>
+                              </div>
+                            )}
         </div>
     </div>
   )

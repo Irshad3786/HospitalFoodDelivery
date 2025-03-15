@@ -8,37 +8,37 @@ function Card({OrderData}) {
         
         
         <div className='flex flex-col justify-center items-center gap-2' >
-            <h1 className='font-semibold underline text-center p-2'>Patient Details</h1>
-            <div className='flex  gap-2 bg-slate-400 p-2 rounded-md text-slate-950 w-[95%] md:w-80'>
+            <h1 className='font-bold underline text-center p-2 font-Varela'>Patient Details</h1>
+            <div className='flex  gap-2 bg-slate-400 p-2 rounded-md text-slate-950 w-[95%] md:w-80 font-Varela'>
                 <h6 >Name </h6>
-                <h6 className='text-white'>{OrderData.Patient.Name}</h6>
+                <h6 className='text-white font-Varela'>{OrderData.Patient.Name}</h6>
             </div>
 
-            <div className='flex  gap-2 bg-slate-400 p-2 rounded-md text-slate-950 w-[95%] md:w-80'>
+            <div className='flex  gap-2 bg-slate-400 p-2 rounded-md text-slate-950 w-[95%] md:w-80 font-Varela'>
                 <h6 >Room No </h6>
-                <h6 className='text-white'>{OrderData.Patient.RoomNumber}</h6>
+                <h6 className='text-white font-Varela'>{OrderData.Patient.RoomNumber}</h6>
             </div>
 
-            <div className='flex  gap-2 bg-slate-400 p-2 rounded-md text-slate-950 w-[95%] md:w-80'>
+            <div className='flex  gap-2 bg-slate-400 p-2 rounded-md text-slate-950 w-[95%] md:w-80 font-Varela'>
                 <h6 >Bed No </h6>
-                <h6 className='text-white'>{OrderData.Patient.BedNumber}</h6>
+                <h6 className='text-white font-Varela' >{OrderData.Patient.BedNumber}</h6>
             </div>
 
-            <div className='flex  gap-2 bg-slate-400 p-2 rounded-md text-slate-950 w-[95%] md:w-80'>
+            <div className='flex  gap-2 bg-slate-400 p-2 rounded-md text-slate-950 w-[95%] md:w-80 font-Varela'>
                 <h6 >Floor No </h6>
-                <h6 className='text-white'>{OrderData.Patient.FloorNumber}</h6>
+                <h6 className='text-white font-Varela'>{OrderData.Patient.FloorNumber}</h6>
             </div>
 
-            <div className='flex  gap-2 bg-slate-400 p-2 rounded-md text-slate-950 w-[95%] md:w-80'>
+            <div className='flex  gap-2 bg-slate-400 p-2 rounded-md text-slate-950 w-[95%] md:w-80 font-Varela'>
                 <h6 >PhoneNo </h6>
-                <h6 className='text-white'>{OrderData.Patient.PhoneNo}</h6>
+                <h6 className='text-white font-Varela'>{OrderData.Patient.PhoneNo}</h6>
             </div>
             
         </div>
 
         
         
-        <div className='flex flex-col justify-center md:justify-normal items-center gap-2' >
+        <div className='flex flex-col justify-center md:justify-normal items-center gap-2 font-Varela' >
             <h1 className='font-semibold underline text-center p-2 '>Pantry Details</h1>
             <div className='flex  gap-2 bg-red-300 p-2 rounded-md text-slate-950 w-[95%] md:w-80'>
                 <h6 >Pantry Name </h6>
@@ -60,7 +60,7 @@ function Card({OrderData}) {
         </div>
 
         
-        <div className='md:flex md:justify-center md:gap-80'>
+        <div className='md:flex md:justify-center md:gap-80 font-Varela'>
         
         <div className='flex flex-col justify-center items-center gap-2' >
             <h1 className='font-semibold underline text-center p-2'>Delivery Person</h1>
@@ -77,7 +77,7 @@ function Card({OrderData}) {
 
         
         
-        <div className='flex flex-col justify-center items-center gap-2 md:justify-normal' >
+        <div className='flex flex-col justify-center items-center gap-2 md:justify-normal font-Varela' >
             <h1 className='font-semibold underline text-center p-2'>Food</h1>
             <div className='flex  gap-2 bg-cyan-300 p-2 rounded-md text-slate-950 w-[95%] md:w-80'>
                 <h6 >{OrderData.FoodItem}</h6>
@@ -88,9 +88,9 @@ function Card({OrderData}) {
         </div>
 
 
-        <h1 className='font-semibold underline text-center p-2'>Status</h1>
+        <h1 className='font-semibold underline text-center p-2 font-Varela'>Status</h1>
         
-        <div className='flex flex-col justify-center items-center gap-2' >
+        <div className='flex flex-col justify-center items-center gap-2 font-Varela' >
             <div className={`flex  gap-2 ${OrderData.Status == "Order Accepted" ? 'bg-green-700' : 'bg-red-700' } p-2 justify-center rounded-md text-slate-950 w-[95%] md:w-64`}>
                 <h6 className='font-semibold'>{OrderData.Status}</h6>
             </div>
