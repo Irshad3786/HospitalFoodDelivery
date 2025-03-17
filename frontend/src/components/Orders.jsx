@@ -35,6 +35,7 @@ function Orders({orders}) {
         })
         return () => {
           socket.off('DeliveryCreated');
+          socket.disconnect();
         };
       }, []);
 
@@ -42,7 +43,8 @@ function Orders({orders}) {
         
         axios.get(`${import.meta.env.VITE_BACKEND_URL}/GetDelivery`)
         .then((res)=>{
-
+            console.log(res.data.data);
+            
         })
         .catch((error)=>{
             console.log(error);
@@ -117,7 +119,16 @@ function Orders({orders}) {
                     <h1 className='text-black text-sm text-center font-semibold'>Food Item</h1>
                 </div>
                 <div className='flex justify-center items-center p-3'>
-                    <p className='text-white text-base max-h-20 overflow-auto scrollbar-thin scrollbar-thumb-[#00FFAA] scrollbar-track-transparent'>{orders.FoodItem}  {orders.Ingredients && `with ${orders.Ingredients}`}  {orders.SpecificFoodItem && `Other Items :  ${orders.SpecificFoodItem}`}</p>
+                <p className='text-white text-base max-h-20 overflow-auto scrollbar-thin scrollbar-thumb-[#00FFAA] scrollbar-track-transparent'>
+                    {orders.FoodItem}{' '}
+                    {orders.Ingredients && (
+                        <span className="text-orange-300 font-Varela">Ingredients: {orders.Ingredients}</span>
+                    )}{' '}
+                    {orders.SpecificFoodItem && (
+                        <span className="text-green-300 font-Varela">Other Items: {orders.SpecificFoodItem}</span>
+                    )}
+                    </p>
+
                 </div>
             </div>
 

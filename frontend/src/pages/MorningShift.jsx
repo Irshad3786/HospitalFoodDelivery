@@ -9,7 +9,7 @@ function MorningShift() {
   const [OrdersData , setOrdersData] = useState([])
   const location = useLocation();
     
-  const PhoneNo = location.state
+  const PhoneNo = location?.state
 
 
   
@@ -17,6 +17,7 @@ function MorningShift() {
   useEffect(()=>{
     axios.post(`${import.meta.env.VITE_BACKEND_URL}/getOrders`,{PhoneNo})
     .then((res)=>{
+      console.log(res);
       
     })
     .catch((error)=>{
@@ -31,13 +32,14 @@ function MorningShift() {
     const socket = io(import.meta.env.VITE_BACKEND_URL);
 
     socket.on('GetAllOrders', (Orders) => {
-      console.log(Orders);
+
       
       setOrdersData(Orders)
     })
     
     return () => {
-      socket.off('OrderCreated');
+      socket.off('GetAllOrders');
+      socket.disconnect();
     }
 
   },[])

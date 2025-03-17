@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Orders from '../components/Orders'
 import { useLocation } from "react-router-dom";
 import axios from 'axios'
+import { io } from 'socket.io-client';
 
 function EveningShift() {
   const [OrdersData , setOrdersData] = useState([])
@@ -23,6 +24,25 @@ function EveningShift() {
       
     })
   },[])
+
+   useEffect(()=>{
+  
+      const socket = io(import.meta.env.VITE_BACKEND_URL);
+  
+      socket.on('GetAllOrders', (Orders) => {
+        console.log(Orders);
+        
+        setOrdersData(Orders)
+      })
+      
+      return () => {
+        socket.off('OrderCreated');
+      }
+  
+    },[])
+  
+
+  
 
   const EveningOrder= OrdersData.filter((data)=> data.Shift === 'Evening')
 

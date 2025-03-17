@@ -7,6 +7,7 @@ export const GetALLOrdersController =  (req,res)=>{
 
         OrdersModel.find({"Pantry.PhoneNo":Number(PhoneNo)})
         .then((data)=>{
+            res.status(200).json({message:"data fetched" , data:data})
             io.emit('GetAllOrders', data);
         })
         .catch(()=>{

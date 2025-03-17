@@ -2,7 +2,7 @@ import React from 'react'
 
 function Card({OrderData}) {
   return (
-    <div className='w-[80%] md:w-fit h-[90%] bg-slate-900 rounded-xl text-white md:p-14 p-2 font-roboto shadow-xl'>
+    <div className='w-[80%] md:w-fit h-[90%] bg-slate-900 rounded-xl text-white md:p-14 p-2 font-roboto shadow-xl border-4 border-white'>
 
         <div className='md:flex md:justify-center md:gap-80'>
         
