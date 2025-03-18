@@ -4,6 +4,8 @@ import Orders from '../components/Orders'
 import { useLocation } from "react-router-dom";
 import axios from 'axios'
 import { io } from 'socket.io-client';
+import { useNavigate } from 'react-router-dom';
+import { DNA } from 'react-loader-spinner'
 
 function NightShift() {
   const [OrdersData , setOrdersData] = useState([])
@@ -11,6 +13,26 @@ function NightShift() {
     
   const PhoneNo = location.state
 
+  const [Spinner , setSpinner] = useState(true)
+  const Navigate = useNavigate()
+
+  
+  useEffect(()=>{
+    axios.get(`${import.meta.env.VITE_BACKEND_URL}/VerifyPantry`,{ withCredentials: true })
+    .then((res)=>{
+        console.log(res.data.message);
+        
+        if(res.data.message === 'authorized User'){
+            
+        }else if(res.data.message === 'No Token Found'){
+            Navigate('/PantryLogin')
+        }
+        
+    })
+    .catch((error)=>{
+
+    })
+  },[])
 
   
 
@@ -29,16 +51,25 @@ function NightShift() {
    useEffect(()=>{
   
       const socket = io(import.meta.env.VITE_BACKEND_URL);
-  
-      socket.on('GetAllOrders', (Orders) => {
-        console.log(Orders);
-        
-        setOrdersData(Orders)
-      })
       
-      return () => {
-        socket.off('OrderCreated');
-      }
+          socket.on('GetAllOrders', (Orders) => {
+            if(Orders){
+              setSpinner(false)
+            }
+            setOrdersData(Orders);
+          });
+      
+          const handlePopState = () => {
+            window.location.reload();
+          };
+          
+          window.addEventListener('popstate', handlePopState);
+      
+          return () => {
+            socket.off('GetAllOrders');
+            socket.disconnect();
+            window.removeEventListener('popstate', handlePopState);
+          };
   
     },[])
   
@@ -68,7 +99,13 @@ function NightShift() {
             
             
         </div>
-        
+        {Spinner && (<div> 
+                        <div className="fixed inset-0 flex flex-col justify-center items-center bg-black bg-opacity-90 z-50">
+                        <DNA visible={true} height="180" width="180" ariaLabel="dna-loading" />
+                        <h1 className='font-Varela text-xl text-white'>Loading... Please Wait</h1>
+                        </div>
+                      </div>
+                    )}
     </div>
   )
 }

@@ -16,22 +16,11 @@ function Orders({orders}) {
 
 
 
-    
-    
-    
- 
-    
-
     useEffect(() => {
         const socket = io(import.meta.env.VITE_BACKEND_URL);
     
         socket.on('DeliveryCreated', (DeliveryData) => {
-           
-        
-            
           setDeliveryData(DeliveryData)
-
-          
         })
         return () => {
           socket.off('DeliveryCreated');
@@ -43,7 +32,7 @@ function Orders({orders}) {
         
         axios.get(`${import.meta.env.VITE_BACKEND_URL}/GetDelivery`)
         .then((res)=>{
-            console.log(res.data.data);
+            
             
         })
         .catch((error)=>{

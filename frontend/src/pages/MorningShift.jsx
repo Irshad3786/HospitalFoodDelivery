@@ -3,21 +3,43 @@ import Orders from '../components/Orders'
 import { useLocation } from "react-router-dom";
 import axios from 'axios'
 import { io } from 'socket.io-client';
+import { useNavigate } from 'react-router-dom';
+import { DNA } from 'react-loader-spinner'
 
 
 function MorningShift() {
   const [OrdersData , setOrdersData] = useState([])
   const location = useLocation();
-    
+  const [Spinner , setSpinner] = useState(true)
   const PhoneNo = location?.state
 
+  const Navigate = useNavigate()
 
+ 
+  useEffect(()=>{
+    axios.get(`${import.meta.env.VITE_BACKEND_URL}/VerifyPantry`,{ withCredentials: true })
+    .then((res)=>{
+   
+        
+        if(res.data.message === 'authorized User'){
+            
+        }else if(res.data.message === 'No Token Found'){
+            Navigate('/PantryLogin')
+        }
+        
+    })
+    .catch((error)=>{
+
+    })
+  },[])
+
+  
   
 
   useEffect(()=>{
     axios.post(`${import.meta.env.VITE_BACKEND_URL}/getOrders`,{PhoneNo})
     .then((res)=>{
-      console.log(res);
+      
       
     })
     .catch((error)=>{
@@ -32,15 +54,24 @@ function MorningShift() {
     const socket = io(import.meta.env.VITE_BACKEND_URL);
 
     socket.on('GetAllOrders', (Orders) => {
-
+      if(Orders){
+        setSpinner(false)
+      }
       
-      setOrdersData(Orders)
-    })
+      setOrdersData(Orders);
+    });
+
+    const handlePopState = () => {
+      window.location.reload();
+    };
     
+    window.addEventListener('popstate', handlePopState);
+
     return () => {
       socket.off('GetAllOrders');
       socket.disconnect();
-    }
+      window.removeEventListener('popstate', handlePopState);
+    };
 
   },[])
 
@@ -68,7 +99,13 @@ function MorningShift() {
             
             
         </div>
-        
+        {Spinner && (<div> 
+                           <div className="fixed inset-0 flex flex-col justify-center items-center bg-black bg-opacity-90 z-50">
+                             <DNA visible={true} height="180" width="180" ariaLabel="dna-loading" />
+                                <h1 className='font-Varela text-xl text-white'>Loading... Please Wait</h1>
+                                </div>
+                              </div>
+                            )}
     </div>
   )
 }

@@ -3,6 +3,8 @@ import React from 'react'
 import { useState } from 'react'
 import { Form } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
+import { DNA } from 'react-loader-spinner'
+import { useEffect } from 'react';
 
 function CreateDelivery() {
       const [Name , setName] = useState('')
@@ -11,6 +13,28 @@ function CreateDelivery() {
       const [EmergencyNo , setEmergencyNo] = useState('')
       const [Password , setPassword ]= useState('')
       const [ConfirmPassword , setConfirmPassword] = useState('')
+      const [Spinner , setSpinner] = useState(false)
+
+
+      
+  useEffect(()=>{
+    axios.get(`${import.meta.env.VITE_BACKEND_URL}/VerifyPantry`,{ withCredentials: true })
+    .then((res)=>{
+        console.log(res.data.message);
+        
+        if(res.data.message === 'authorized User'){
+            
+        }else if(res.data.message === 'No Token Found'){
+            Navigate('/PantryLogin')
+        }
+        
+    })
+    .catch((error)=>{
+
+    })
+  },[])
+
+
       
       const PantryDataSubmit = (e)=>{
         e.preventDefault();
@@ -20,9 +44,11 @@ function CreateDelivery() {
         }else if(Password != ConfirmPassword ){
             toast.info('Confirm Password is Not Correct')
         }else{
+            setSpinner(true)
             axios.post(`${import.meta.env.VITE_BACKEND_URL}/CreateDelivery`,{Name,ContactInfo,Location,EmergencyNo,Password})
             .then((res)=>{
                 if(res.data.message === 'Delivery Account Created Successfully'){
+                    setSpinner(false)
                     toast.success('Delivery Account Created Successfully')
                     setName('')
                     setContactInfo('')
@@ -45,7 +71,9 @@ function CreateDelivery() {
     <div className='bg-[#00FFAA] w-[100%] min-h-screen '>
         <div >
             <div className='p-4 '>
-                <button className='flex justify-center items-center text-lg shadow-lg font-semibold bg-white  rounded-xl pr-5 font-roboto hover:bg-slate-400'><svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 24 24"><path fill="currentColor" d="M13.836 8.964a.9.9 0 0 1 0 1.272L12.073 12l1.763 1.764a.9.9 0 1 1-1.273 1.272l-2.4-2.4a.9.9 0 0 1 0-1.272l2.4-2.4a.9.9 0 0 1 1.273 0"/></svg>Back </button>
+                <button className='flex justify-center items-center text-lg shadow-lg font-semibold bg-white  rounded-xl pr-5 font-roboto hover:bg-slate-400' onClick={()=>{
+                    
+                }}><svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 24 24"><path fill="currentColor" d="M13.836 8.964a.9.9 0 0 1 0 1.272L12.073 12l1.763 1.764a.9.9 0 1 1-1.273 1.272l-2.4-2.4a.9.9 0 0 1 0-1.272l2.4-2.4a.9.9 0 0 1 1.273 0"/></svg>Back </button>
                 <h1 className='text-3xl  text-center p-5 font-bold font-Varela'>Create Delivery</h1>
             </div>
             <div>
@@ -66,6 +94,13 @@ function CreateDelivery() {
                 </div>
             </Form>
             </div>
+            {Spinner && (<div> 
+                        <div className="fixed inset-0 flex flex-col justify-center items-center bg-black bg-opacity-90 z-50">
+                        <DNA visible={true} height="180" width="180" ariaLabel="dna-loading" />
+                        <h1 className='font-Varela text-xl text-white'>Loading... Please Wait</h1>
+                        </div>
+                      </div>
+                    )}
         </div>
     </div>
   )

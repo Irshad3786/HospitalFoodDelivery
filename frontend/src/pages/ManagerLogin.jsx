@@ -22,6 +22,9 @@ function ManagerLogin() {
         if(res.data.message === "User Authenticated"){
           setSpinner(false)
           Navigate('/ManagerDashboard')
+        }else{
+          toast.warn("Wrong Password or Email")
+          setSpinner(false)
         }
       })
       .catch((error)=>{
@@ -34,6 +37,9 @@ function ManagerLogin() {
     <div>
       <div className={`bg-[#00FFAA] w-[100%] h-screen pt-32 `}>
       <ToastContainer/>
+      <button className='flex justify-center items-center text-lg shadow-lg font-semibold bg-white  rounded-xl pr-5 font-roboto absolute top-3 left-3 hover:bg-slate-400' onClick={()=>{
+                  Navigate('/')
+                }}><svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 24 24"><path fill="currentColor" d="M13.836 8.964a.9.9 0 0 1 0 1.272L12.073 12l1.763 1.764a.9.9 0 1 1-1.273 1.272l-2.4-2.4a.9.9 0 0 1 0-1.272l2.4-2.4a.9.9 0 0 1 1.273 0"/></svg>Back </button>
         <h1 className='text-center pt-10 text-xl font-Varela font-bold sm:text-2xl md:text-3xl'>Manager Dashboard Login</h1>
         <Form onSubmit={Submit} >
             <div className='flex flex-col justify-center items-center gap-7 pt-28'>

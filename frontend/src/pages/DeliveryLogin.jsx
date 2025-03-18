@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Form, Link, useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
+import { DNA } from 'react-loader-spinner'
 
 
 function DeliveryLogin() {
@@ -10,7 +11,7 @@ function DeliveryLogin() {
     const [PhoneNo , setPhoneNo] = useState();
     const [Password , setPassword] = useState();
     const Navigate = useNavigate()
-
+    const [Spinner , setSpinner] = useState(false)
 
     const Submit =(e)=>{
         e.preventDefault();
@@ -18,11 +19,16 @@ function DeliveryLogin() {
         if(!PhoneNo || !Password){
         toast.warn("Fill in all fields.")
         }else{
+          setSpinner(true)
         axios.post(`${import.meta.env.VITE_BACKEND_URL}/DeliveryLogin`,{PhoneNo,Password},{ withCredentials: true })
         .then((res)=>{
 
             if(res.data.message === "User Authenticated"){
+              setSpinner(false)
             Navigate('/DeliveryDashboard', {state:PhoneNo})
+            }else{
+              setSpinner(false)
+              toast.warn("Wrong PhoneNo or Password")
             }
         })
         .catch((error)=>{
@@ -37,6 +43,9 @@ function DeliveryLogin() {
     <div>
         <div className='bg-[#00FFAA] w-[100%] h-screen pt-28'>
       <ToastContainer/>
+      <button className='flex justify-center items-center text-lg shadow-lg font-semibold bg-white  rounded-xl pr-5 font-roboto absolute top-3 left-3 hover:bg-slate-400' onClick={()=>{
+                  Navigate('/')
+                }}><svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 24 24"><path fill="currentColor" d="M13.836 8.964a.9.9 0 0 1 0 1.272L12.073 12l1.763 1.764a.9.9 0 1 1-1.273 1.272l-2.4-2.4a.9.9 0 0 1 0-1.272l2.4-2.4a.9.9 0 0 1 1.273 0"/></svg>Back </button>
         <h1 className='text-center pt-16 text-xl font-Varela font-bold sm:text-2xl md:text-3xl'>Delivery Dashboard Login</h1>
         <Form onSubmit={Submit} >
             <div className='flex flex-col justify-center items-center gap-7 pt-28'>
@@ -56,6 +65,13 @@ function DeliveryLogin() {
         </Form>
         
       </div>
+      {Spinner && (<div> 
+                        <div className="fixed inset-0 flex flex-col justify-center items-center bg-black bg-opacity-90 z-50">
+                        <DNA visible={true} height="180" width="180" ariaLabel="dna-loading" />
+                        <h1 className='font-Varela text-xl text-white'>Loading... Please Wait</h1>
+                        </div>
+                      </div>
+                    )}
     </div>
   )
 }
