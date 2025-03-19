@@ -23,6 +23,8 @@ import NightShift from './pages/NightShift'
 import CreateDelivery from './pages/CreateDelivery'
 import DeliveryLogin from './pages/DeliveryLogin'
 import DeliveryDashboard from './pages/DeliveryDashboard'
+import PatientUpdate from './pages/PatientUpdate'
+import PantryUpdate from './pages/PantryUpdate'
 
 function App() {
   const Router = createBrowserRouter([
@@ -106,6 +108,15 @@ function App() {
       path:'DeliveryDashboard',
       element : <DeliveryDashboard/>
     },
+    {
+      path:'UpdatePatient',
+      element : <PatientUpdate/>
+    },
+    {
+      path:'UpdatePantry',
+      element : <PantryUpdate/>
+    },
+   
    
     
   ])
