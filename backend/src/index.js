@@ -24,6 +24,9 @@ import CheckDeliveryStatus from './routes/CheckDeliveryStatus.js'
 import DeliveryCompletedRoute from './routes/DeliveryCompletedRoute.js'
 import VerifyTokenRoute from './routes/VerifyTokenRoute.js'
 import VerifyPantryRoute from './routes/VerifyPantryRoute.js'
+import SearchPatientRoute from './routes/SearchPatientRoute.js'
+import UpdatePatientRot from './routes/UpdatePatientRote.js'
+
 
 import http from 'http';
 import { Server } from 'socket.io';  
@@ -85,6 +88,9 @@ app.use('/CheckStatusDelivery',CheckDeliveryStatus)
 app.use('/OrderDelivered',DeliveryCompletedRoute)
 app.use('/VerifyManager',VerifyTokenRoute)
 app.use('/VerifyPantry',VerifyPantryRoute)
+app.use('/SearchPatient',SearchPatientRoute)
+app.use('/UpatePatient',UpdatePatientRot)
+
 
 const PORT = process.env.PORT || 5000;
 
