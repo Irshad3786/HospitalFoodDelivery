@@ -26,7 +26,8 @@ import VerifyTokenRoute from './routes/VerifyTokenRoute.js'
 import VerifyPantryRoute from './routes/VerifyPantryRoute.js'
 import SearchPatientRoute from './routes/SearchPatientRoute.js'
 import UpdatePatientRot from './routes/UpdatePatientRote.js'
-
+import UpdatePantryRoute from './routes/UpdatePantryRoute.js'
+import SearchPantry from './routes/SearchPantry.js'
 
 import http from 'http';
 import { Server } from 'socket.io';  
@@ -90,6 +91,8 @@ app.use('/VerifyManager',VerifyTokenRoute)
 app.use('/VerifyPantry',VerifyPantryRoute)
 app.use('/SearchPatient',SearchPatientRoute)
 app.use('/UpatePatient',UpdatePatientRot)
+app.use('/UpdatePantry',UpdatePantryRoute)
+app.use('/SearchPantry',SearchPantry)
 
 
 const PORT = process.env.PORT || 5000;
