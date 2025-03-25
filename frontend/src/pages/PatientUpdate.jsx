@@ -93,7 +93,7 @@ function PatientUpdate() {
                     <input type="number" placeholder='Bed Number' className='border border-black p-3 rounded-md sm:w-[30%] shadow-lg' value={BedNumber} min="1" onChange={(e)=>{setBedNumber(e.target.value)}} />
                     <input type="number" placeholder='Floor Number' className='border border-black p-3 rounded-md sm:w-[30%] shadow-lg' value={FloorNumber} min="1" onChange={(e)=>{setFloorNumber(e.target.value)}} />
                     <input type="number" placeholder='Age' className='border border-black p-3 rounded-md sm:w-[30%] shadow-lg' value={Age} min="1" onChange={(e)=>{setAge(e.target.value)}} />
-                    <input type="text" placeholder='Phone No' className='border border-black p-3 rounded-md sm:w-[30%] shadow-lg' value={PhoneNo}  onChange={(e)=>{setPhoneNumber(e.target.value)}} />
+                    
                     <input type="text" placeholder='Emergency Contact' className='border border-black p-3 rounded-md sm:w-[30%] shadow-lg' value={EmergencyContact}  onChange={(e)=>{setEmergencyContact(e.target.value)}} />
                     <div className='p-4 rounded-md sm:w-[30%] flex flex-col md:flex md:flex-row justify-center items-center'>
                         <h1 className='p-2 font-Varela font-bold text-2xl text-gray-700'>Gender</h1>

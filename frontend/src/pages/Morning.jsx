@@ -3,11 +3,12 @@ import Card from '../components/Card'
 import { io } from 'socket.io-client';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { DNA } from 'react-loader-spinner'
 
 function Morning() {
   const Navigate = useNavigate()
   const[Orders , setOrders] = useState([])
-
+  const [Spinner , setSpinner] = useState(true)
 
 
   useEffect(()=>{
@@ -43,7 +44,11 @@ function Morning() {
     const socket = io(import.meta.env.VITE_BACKEND_URL);
 
     socket.on('OrderCreated', (Orders) => {
-      setOrders(Orders)
+      if(Orders){
+        setSpinner(false)
+        setOrders(Orders)
+      }
+      
     })
 
     return () => {
@@ -77,6 +82,13 @@ function Morning() {
           }
         </div>
       </div>
+      {Spinner && (<div> 
+                              <div className="fixed inset-0 flex flex-col justify-center items-center bg-black bg-opacity-90 z-50">
+                              <DNA visible={true} height="180" width="180" ariaLabel="dna-loading" />
+                              <h1 className='font-Varela text-xl text-white'>Loading... Please Wait</h1>
+                              </div>
+                            </div>
+                          )}
     </div>
   )
 }

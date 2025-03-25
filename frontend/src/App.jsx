@@ -25,6 +25,7 @@ import DeliveryLogin from './pages/DeliveryLogin'
 import DeliveryDashboard from './pages/DeliveryDashboard'
 import PatientUpdate from './pages/PatientUpdate'
 import PantryUpdate from './pages/PantryUpdate'
+import UpdateDelivery from './pages/UpdateDelivery'
 
 function App() {
   const Router = createBrowserRouter([
@@ -116,7 +117,10 @@ function App() {
       path:'UpdatePantry',
       element : <PantryUpdate/>
     },
-   
+    {
+      path:'UpdateDelivery',
+      element : <UpdateDelivery/>
+    },
    
     
   ])

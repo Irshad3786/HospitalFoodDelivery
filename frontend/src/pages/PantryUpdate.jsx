@@ -79,7 +79,7 @@ function PantryUpdate() {
         </div>
        {data && (<div className='flex flex-col justify-center items-center p-4 gap-4 '>
                    <input type="text" placeholder='Pantry Name' className='border border-black p-3 rounded-md sm:w-[30%] shadow-lg' value={PantryName} onChange={(e)=>{setPantryName(e.target.value)}} />
-                    <input type="number" placeholder='Contact No' className='border border-black p-3 rounded-md sm:w-[30%] shadow-lg' value={ContactInfo} onChange={(e)=>{setContactInfo(e.target.value)}} />
+                    
                     <input type="text" placeholder='Location' className='border border-black p-3 rounded-md sm:w-[30%] shadow-lg' value={Location} onChange={(e)=>{setLocation(e.target.value)}} />
                     <input type="number" placeholder='Pantry No' className='border border-black p-3 rounded-md sm:w-[30%] shadow-lg' value={PantryNo}  onChange={(e)=>{setPantryNo(e.target.value)}} />
                     <input type="password" placeholder='Password' className='border border-black p-3 rounded-md sm:w-[30%] shadow-lg' value={Password}   onChange={(e)=>{setPassword(e.target.value)}} />

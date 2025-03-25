@@ -1,10 +1,11 @@
 import axios from 'axios'
 import React from 'react'
 import { useState } from 'react'
-import { Form } from 'react-router-dom'
+import { Form, useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import { DNA } from 'react-loader-spinner'
 import { useEffect } from 'react';
+
 
 function CreateDelivery() {
       const [Name , setName] = useState('')
@@ -14,7 +15,7 @@ function CreateDelivery() {
       const [Password , setPassword ]= useState('')
       const [ConfirmPassword , setConfirmPassword] = useState('')
       const [Spinner , setSpinner] = useState(false)
-
+    const Navigate = useNavigate()
 
       
   useEffect(()=>{
@@ -67,14 +68,25 @@ function CreateDelivery() {
         }
           
       }
+
+
+      
   return (
     <div className='bg-[#00FFAA] w-[100%] min-h-screen '>
         <div >
             <div className='p-4 '>
+                <div className='flex justify-between'>
+
+               
                 <button className='flex justify-center items-center text-lg shadow-lg font-semibold bg-white  rounded-xl pr-5 font-roboto hover:bg-slate-400' onClick={()=>{
-                    
+                    Navigate('/PantryDashboard')
                 }}><svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 24 24"><path fill="currentColor" d="M13.836 8.964a.9.9 0 0 1 0 1.272L12.073 12l1.763 1.764a.9.9 0 1 1-1.273 1.272l-2.4-2.4a.9.9 0 0 1 0-1.272l2.4-2.4a.9.9 0 0 1 1.273 0"/></svg>Back </button>
-                <h1 className='text-3xl  text-center p-5 font-bold font-Varela'>Create Delivery</h1>
+                    <button className='flex justify-center items-center text-lg shadow-lg font-semibold bg-white  rounded-xl px-2 py-2 font-roboto hover:bg-slate-400' onClick={()=>{
+                        Navigate('/UpdateDelivery')
+                    }}>Update Delivery</button>
+                    </div>
+                <h1 className='text-3xl  text-center p-5 font-bold font-Varela '>Create Delivery</h1>
+                
             </div>
             <div>
             <ToastContainer/>

@@ -28,6 +28,8 @@ import SearchPatientRoute from './routes/SearchPatientRoute.js'
 import UpdatePatientRot from './routes/UpdatePatientRote.js'
 import UpdatePantryRoute from './routes/UpdatePantryRoute.js'
 import SearchPantry from './routes/SearchPantry.js'
+import SearchDelivery from './routes/SearchDelivery.js'
+import DeliveryDetailsUpdateRoute from './routes/DeliveryDetailsUpdateRoute.js'
 
 import http from 'http';
 import { Server } from 'socket.io';  
@@ -93,6 +95,8 @@ app.use('/SearchPatient',SearchPatientRoute)
 app.use('/UpatePatient',UpdatePatientRot)
 app.use('/UpdatePantry',UpdatePantryRoute)
 app.use('/SearchPantry',SearchPantry)
+app.use('/SearchDelivery',SearchDelivery)
+app.use('/UpdateDelivery',DeliveryDetailsUpdateRoute)
 
 
 const PORT = process.env.PORT || 5000;

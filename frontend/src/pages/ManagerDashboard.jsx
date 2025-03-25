@@ -51,7 +51,7 @@ function ManagerDashboard() {
 
   return (
     <div>
-        <div className='bg-[#00FFAA] h-screen w-[100%] sm:h-screen '>
+        <div className='bg-[#00FFAA] min-h-screen w-[100%] sm:h-screen '>
             <div className='md:flex md:justify-center md:items-center md:gap-8 sm:flex border border-b-black'>
                 <div className='absolute left-3 top-2'>
                 <button className='flex justify-center items-center text-lg shadow-lg font-semibold bg-white  rounded-xl  font-roboto hover:bg-slate-400' onClick={()=>{

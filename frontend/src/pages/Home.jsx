@@ -53,7 +53,7 @@ function Home() {
 
   return (
     <div className='w-[100%] h-screen'>
-        <div className='w-[100%] h-20 bg-[#00FFAA] flex justify-center items-center gap-6 md:justify-start md:gap-[52%] sm:gap-[30%] '>
+        <div className='w-[100%] h-20 bg-[#00FFAA] flex justify-center items-center gap-6 md:justify-start md:gap-[52%] sm:gap-[30%] shadow-2xl'>
             <h1 className='font-Dangrek text-xl sm:text-3xl md:3xl md:pl-12'>NutriCare</h1>
             <div className='flex gap-2'>
                 <button className='flex justify-center items-center bg-white p-1 rounded-sm font-Varela hover:bg-slate-400 md:p-3 sm:p-3 sm:rounded-lg md:rounded-lg cursor-pointer font-bold border border-black shadow-md' onClick={Login}>
