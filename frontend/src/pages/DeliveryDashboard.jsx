@@ -1,12 +1,33 @@
 import React from 'react'
 import DeliveryCard from '../components/DeliveryCard'
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from 'react';
+import axios from 'axios';
+
+
 
 function DeliveryDashboard() {
   const location = useLocation();
   
   const PhoneNO = location.state
 
+  const Navigate = useNavigate()
+
+  useEffect(()=>{
+    axios.get(`${import.meta.env.VITE_BACKEND_URL}/VerifyDelivery`,{ withCredentials: true })
+    .then((res)=>{
+        console.log(res.data.message);
+        
+        if(res.data.message === 'authorized User'){
+            
+        }else if(res.data.message === 'No Token Found'){
+            Navigate('/DeliveryLogin')
+        }
+    })
+    .catch((error)=>{
+
+    })
+  },[])
   
 
   return (

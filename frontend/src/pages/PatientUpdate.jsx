@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+
 
 function PatientUpdate() {
   const [phoneNo,setPhoneNo] = useState('')
@@ -15,6 +18,25 @@ function PatientUpdate() {
       const [EmergencyContact ,setEmergencyContact] = useState('')
       const [Gender , setGender] = useState('')
       const [data , setdata] = useState(false)
+      const Navigate =   useNavigate()
+
+
+      useEffect(()=>{
+        axios.get(`${import.meta.env.VITE_BACKEND_URL}/VerifyManager`,{ withCredentials: true })
+        .then((res)=>{
+            console.log(res.data.message);
+            
+            if(res.data.message === 'authorized User'){
+                
+            }else if(res.data.message === 'No Token Found'){
+                Navigate('/ManagerLogin')
+            }
+            
+        })
+        .catch((error)=>{
+
+        })
+    },[])
 
   const Submit =(e)=>{
     e.preventDefault()
@@ -79,6 +101,9 @@ function PatientUpdate() {
     <div className='bg-[#00FFAA] w-[100%] min-h-screen font-Varela'>
        <ToastContainer/>
         <div className='flex justify-center items-center pt-24 font-bold flex-col gap-3'>
+        <button className='flex justify-center items-center text-lg shadow-lg font-semibold bg-white  rounded-xl pr-5 font-roboto hover:bg-slate-400 absolute left-2 top-3' onClick={()=>{
+                    Navigate('/ManagerDashboard')
+                }}><svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 24 24"><path fill="currentColor" d="M13.836 8.964a.9.9 0 0 1 0 1.272L12.073 12l1.763 1.764a.9.9 0 1 1-1.273 1.272l-2.4-2.4a.9.9 0 0 1 0-1.272l2.4-2.4a.9.9 0 0 1 1.273 0"/></svg>Back </button>
             <h1 className='text-xl md:text-2xl'>Patient Details Update</h1>
             <div >
                 <input type="number"  className='px-6 py-2 w-72' placeholder='Enter Patient PhoneNo' value={phoneNo} onChange={(e)=>{setPhoneNo(e.target.value)}}/>

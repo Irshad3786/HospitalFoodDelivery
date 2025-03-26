@@ -61,6 +61,7 @@ function CreateDelivery() {
             })
             .catch((error)=>{
                 if(error.response.data.message == 'EmergencyNo or Phone No already exists'){
+                    setSpinner(false)
                     toast.warn('EmergencyNo or Phone No already exists')
                 }
                 
