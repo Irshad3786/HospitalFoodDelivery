@@ -21,7 +21,6 @@ export const LoginManagerAccountController =  (req,res)=>{
                             if(ManagerToken){
                                  res.cookie("ManagerToken",ManagerToken,{
                                     httpOnly: true,
-                                    secure: process.env.NODE_ENV === "production",
                                     sameSite: "None",
                                     maxAge: 24 * 60 * 60 * 1000
                                 })
