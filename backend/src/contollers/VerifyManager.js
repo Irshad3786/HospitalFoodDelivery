@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken'
 export const VeriftManagerController = async (req,res) =>{
     const token = req.cookies.ManagerToken
    
+    console.log(token);
     
     try {
         if(!token){
