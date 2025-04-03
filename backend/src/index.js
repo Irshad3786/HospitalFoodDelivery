@@ -101,7 +101,7 @@ app.use('/UpdateDelivery',DeliveryDetailsUpdateRoute)
 app.use('/VerifyDelivery' ,VerifyDeliveryRoute )
 
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 443;
 
 server.listen(PORT,'0.0.0.0', () => {
   console.log(`Server running on  https://13.232.47.6:${PORT}`);
