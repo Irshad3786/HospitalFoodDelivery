@@ -89,6 +89,7 @@ function CreateDiet() {
     })
 
     socket.on('PantryCreated', (data) => {
+      console.log(data);
       
       setPantrydata(data)
     });
