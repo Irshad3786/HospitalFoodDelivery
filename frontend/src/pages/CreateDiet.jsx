@@ -82,6 +82,8 @@ function CreateDiet() {
 
 
   useEffect(() => {
+    console.log("first exe");
+    
     const socket = io(import.meta.env.VITE_BACKEND_URL);
 
     socket.on('patientCreated', (patientData) => {
