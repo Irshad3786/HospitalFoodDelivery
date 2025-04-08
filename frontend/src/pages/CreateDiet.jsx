@@ -89,6 +89,10 @@ function CreateDiet() {
       withCredentials: true       
     });
 
+    socket.on("connect", () => {
+      console.log("Frontend connected:", socket.id);
+    })
+
 
     socket.on('patientCreated', (patientData) => {
       console.log("Frontend socket connected with ID:", socket.id);
