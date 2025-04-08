@@ -91,6 +91,7 @@ function CreateDiet() {
 
 
     socket.on('patientCreated', (patientData) => {
+      console.log("Frontend socket connected with ID:", socket.id);
       console.log(patientData);
       
       setPatientData(patientData)
