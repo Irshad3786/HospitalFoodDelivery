@@ -84,10 +84,7 @@ function CreateDiet() {
   useEffect(() => {
     
     
-    const socket = io(import.meta.env.VITE_BACKEND_URL, {
-      transports: ['websocket'], 
-      withCredentials: true       
-    });
+    const socket = io(import.meta.env.VITE_BACKEND_URL);
 
 
     socket.on('patientCreated', (patientData) => {
