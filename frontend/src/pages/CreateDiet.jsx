@@ -91,11 +91,13 @@ function CreateDiet() {
 
 
     socket.on('patientCreated', (patientData) => {
+      console.log(patientData);
+      
       setPatientData(patientData)
     })
 
     socket.on('PantryCreated', (data) => {
-      console.log(data);
+     
       
       setPantrydata(data)
     });
