@@ -59,8 +59,8 @@ function CreateDiet() {
 
  useEffect(()=>{
   axios.get(`${import.meta.env.VITE_BACKEND_URL}/FullPatientData`)
-  .then((data)=>{
-    setPatientData(data);
+  .then((res)=>{
+    setPatientData(res.data);
   })
   .catch((error)=>{
     console.log(error);
@@ -70,8 +70,8 @@ function CreateDiet() {
 
  useEffect(()=>{
   axios.get(`${import.meta.env.VITE_BACKEND_URL}/FullPantryData`)
-  .then((data)=>{
-    setPatientData(data);
+  .then((res)=>{
+    setPatientData(res.data);
   })
   .catch((error)=>{
     console.log(error);
