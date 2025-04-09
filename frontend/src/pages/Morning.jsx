@@ -33,6 +33,9 @@ function Morning() {
     axios.get(`${import.meta.env.VITE_BACKEND_URL}/FullOrdersData`)
     .then((res)=>{
       setOrders(res.data.data)
+      if(res){
+        setSpinner(false)
+      }
     })
     .catch((error)=>{
       console.log(error);

@@ -30,8 +30,11 @@ function Night() {
 
   useEffect(()=>{
     axios.get(`${import.meta.env.VITE_BACKEND_URL}/FullOrdersData`)
-    .then(()=>{
-
+    .then((res)=>{
+      setOrders(res.data.data)
+      if(res){
+        setSpinner(false)
+      }
     })
     .catch((error)=>{
       console.log(error);
