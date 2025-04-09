@@ -39,7 +39,7 @@ function MorningShift() {
   useEffect(()=>{
     axios.post(`${import.meta.env.VITE_BACKEND_URL}/getOrders`,{PhoneNo})
     .then((res)=>{
-      
+      setOrdersData(res.data.data)
       
     })
     .catch((error)=>{
