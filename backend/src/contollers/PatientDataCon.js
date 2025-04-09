@@ -5,6 +5,8 @@ export const DataVisibleAll = (req,res)=>{
 
     PatientDetailsModel.find({})
     .then((data)=>{
+        console.log(data);
+        
         io.emit('patientCreated', data);
 
         return res.status(200).json({ message: "Patient details fetched successfully", data: data});
