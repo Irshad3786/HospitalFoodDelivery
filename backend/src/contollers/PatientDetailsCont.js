@@ -12,7 +12,7 @@ export const CreatePatientDetailsController =  (req,res)=>{
                 return PatientDetailsModel.create({Name,Diseases,Allergies,RoomNumber,BedNumber,FloorNumber,Age,PhoneNo,EmergencyContact,Gender})
                 .then((patientDetails)=>{
                     PatientDetailsModel.find({})
-                            .select('Name Diseases Allergies PhoneNo')  
+                            .select('Name Diseases Allergies PhoneNo RoomNumber BedNumber FloorNumber Age Gender')  
                             .then((allPatientData) => {
                                 io.emit('patientCreated', allPatientData);
                             })
