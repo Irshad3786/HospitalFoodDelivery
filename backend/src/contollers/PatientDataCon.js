@@ -9,7 +9,7 @@ export const DataVisibleAll = (req,res)=>{
         
         io.emit('patientCreated', data);
 
-        return res.status(200).json({ message: "Patient details fetched successfully", data: data});
+        return res.status(200).json({ message: "Patient detailes fetched successfully", data: data});
         
     })
     .catch(()=>{
