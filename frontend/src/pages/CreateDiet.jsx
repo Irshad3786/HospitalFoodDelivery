@@ -84,7 +84,7 @@ function CreateDiet() {
   useEffect(() => {
     
     
-    const socket = io(import.meta.env.VITE_BACKEND_URL, {
+    const socket = io("wss://hospital-food-management-api.duckdns.org", {
       transports: ['websocket'], 
       withCredentials: true       
     });
