@@ -81,45 +81,34 @@ function CreateDiet() {
 
 
 
- useEffect(() => {
-  console.log("Attempting to connect to socket...");
+  useEffect(() => {
+    
+    
+    const socket = io("wss://hospital-food-management-api.duckdns.org", {
+      transports: ['websocket'], 
+      withCredentials: true       
+    });
 
-  const socket = io("wss://hospital-food-management-api.duckdns.org", {
-    transports: ["websocket"],
-    withCredentials: true,
-  });
 
-  // Log socket connect event
-  socket.on("connect", () => {
-    console.log("✅ Connected to socket! ID:", socket.id);
-  });
+    socket.on('patientCreated', (patientData) => {
+      console.log("Frontend socket connected with ID:", socket.id);
+      
+      console.log(patientData);
+      
+      setPatientData(patientData)
+    })
 
-  // Log socket connect_error
-  socket.on("connect_error", (err) => {
-    console.error("❌ Socket connection error:", err.message);
-  });
-
-  // Log on patientCreated
-  socket.on("patientCreated", (patientData) => {
-    console.log("📦 Received patientCreated data:", patientData);
-    setPatientData(patientData);
-  });
-
-  // Log on PantryCreated
-  socket.on("PantryCreated", (data) => {
-    console.log("📦 Received PantryCreated data:", data);
-    setPantrydata(data);
-  });
-
-  // Disconnect cleanup
-  return () => {
-    console.log("🔌 Cleaning up socket listeners...");
-    socket.off("patientCreated");
-    socket.off("PantryCreated");
-    socket.disconnect();
-  };
-}, []);
-
+    socket.on('PantryCreated', (data) => {
+     
+      
+      setPantrydata(data)
+    });
+  
+    return () => {
+      socket.off('patientCreated');
+      socket.off('PantryCreated');
+    };
+  }, []);
 
 
  
