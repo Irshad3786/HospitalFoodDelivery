@@ -84,15 +84,18 @@ function CreateDiet() {
   useEffect(() => {
     
     
-    const socket = io("wss://hospital-food-management-api.duckdns.org", {
+    const socket = io(import.meta.env.VITE_BACKEND_URL, {
       transports: ['websocket'], 
       withCredentials: true       
     });
 
+    socket.on("connect", () => {
+      console.log("Frontend connected:", socket.id);
+    })
+
 
     socket.on('patientCreated', (patientData) => {
       console.log("Frontend socket connected with ID:", socket.id);
-      
       console.log(patientData);
       
       setPatientData(patientData)
