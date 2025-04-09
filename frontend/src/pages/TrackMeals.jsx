@@ -44,8 +44,8 @@ function TrackMeals() {
 
   useEffect(()=>{
     axios.get(`${import.meta.env.VITE_BACKEND_URL}/FullOrdersData`)
-    .then(()=>{
-
+    .then((res)=>{
+      setOrders(res.data.data)
     })
     .catch((error)=>{
       console.log(error);
