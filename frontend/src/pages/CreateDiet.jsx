@@ -93,6 +93,14 @@ function CreateDiet() {
       console.log("Frontend connected:", socket.id);
     })
 
+    socket.on("connect_error", (err) => {
+      console.error("Connection error:", err.message); 
+    });
+    
+    socket.on("message", (data) => {
+      console.log("Received message:", data); 
+    });
+
 
     socket.on('patientCreated', (patientData) => {
       console.log("Frontend socket connected with ID:", socket.id);
