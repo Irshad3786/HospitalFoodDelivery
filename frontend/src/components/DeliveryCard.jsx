@@ -41,8 +41,8 @@ function DeliveryCard({Phonenumber}) {
 
     useEffect(()=>{
         axios.post(`${import.meta.env.VITE_BACKEND_URL}/DeliveryData`,{PhoneNo:Phonenumber})
-        .then((data)=>{
-          
+        .then((res)=>{
+            setDeliverydata(res.data.data)
         })
         .catch((error)=>{
           console.log(error);
