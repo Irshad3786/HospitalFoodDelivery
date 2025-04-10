@@ -11,7 +11,7 @@ function MorningShift() {
   const [OrdersData , setOrdersData] = useState([])
   const location = useLocation();
   const [Spinner , setSpinner] = useState(true)
-  const PhoneNo = location?.state
+  const PhoneNo = location?.state || sessionStorage.getItem("phoneNo");
 
   const Navigate = useNavigate()
 
