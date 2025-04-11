@@ -30,18 +30,21 @@ function PantryDashboard() {
 
 
   const Morning = ()=>{
-    Navigate('/MorningShift',{state:PhoneNO})
     sessionStorage.setItem("phoneNo", PhoneNO);
+    Navigate('/MorningShift',{state:PhoneNO})
+    
   }
 
   const Evening = ()=>{
-    Navigate('/EveningShift',{state:PhoneNO})
     sessionStorage.setItem("phoneNo", PhoneNO);
+    Navigate('/EveningShift',{state:PhoneNO})
+    
   }
 
   const Night = ()=>{
-    Navigate('/NightShift',{state:PhoneNO})
     sessionStorage.setItem("phoneNo", PhoneNO);
+    Navigate('/NightShift',{state:PhoneNO})
+    
   }
 
   const CreateDeliveryAccount =()=>{

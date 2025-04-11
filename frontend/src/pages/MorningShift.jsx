@@ -12,6 +12,7 @@ function MorningShift() {
   const location = useLocation();
   const [Spinner , setSpinner] = useState(true)
   const [PhoneNo, setPhoneNo] = useState('');
+  const Navigate = useNavigate()
 
   useEffect(() => {
     const phone = location?.state || sessionStorage.getItem("phoneNo");
@@ -23,15 +24,16 @@ function MorningShift() {
     }
   }, [location?.state]);
 
-  const Navigate = useNavigate()
-  console.log(PhoneNo);
+  console.log("Location state:", location.state);
+  console.log("Session Phone:", sessionStorage.getItem("phoneNo"));
+
+  console.log("org",PhoneNo);
   
  
   useEffect(()=>{
     axios.get(`${import.meta.env.VITE_BACKEND_URL}/VerifyPantry`,{ withCredentials: true })
     .then((res)=>{
    
-        
         if(res.data.message === 'authorized User'){
             
         }else if(res.data.message === 'No Token Found'){
