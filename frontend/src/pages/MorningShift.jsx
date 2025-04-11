@@ -15,9 +15,7 @@ function MorningShift() {
   const Navigate = useNavigate()
 
   useEffect(() => {
-    console.log("Location state:", location.state);
-    console.log("Session Phone:", sessionStorage.getItem("phoneNo"));
-  
+
     const phone = location?.state || sessionStorage.getItem("phoneNo");
   
     if (phone) {
@@ -29,7 +27,7 @@ function MorningShift() {
   }, [location?.state]);
 
 
-  console.log("org",PhoneNo);
+
   
  
   useEffect(()=>{

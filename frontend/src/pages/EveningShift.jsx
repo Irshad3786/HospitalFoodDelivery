@@ -11,9 +11,21 @@ function EveningShift() {
   const [OrdersData , setOrdersData] = useState([])
   const location = useLocation();
   const [Spinner , setSpinner] = useState(true)
-  const PhoneNo = location.state || sessionStorage.getItem("phoneNo");
-
-  const Navigate = useNavigate()
+  const [PhoneNo, setPhoneNo] = useState('');
+    const Navigate = useNavigate()
+  
+    useEffect(() => {
+  
+      const phone = location?.state || sessionStorage.getItem("phoneNo");
+    
+      if (phone) {
+        setPhoneNo(phone);
+        sessionStorage.setItem("phoneNo", phone); 
+      } else {
+        Navigate('/PantryLogin');
+      }
+    }, [location?.state]);
+  
   
   useEffect(()=>{
     axios.get(`${import.meta.env.VITE_BACKEND_URL}/VerifyPantry`,{ withCredentials: true })
