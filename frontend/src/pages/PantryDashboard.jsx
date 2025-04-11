@@ -8,7 +8,7 @@ function PantryDashboard() {
   const Navigate = useNavigate()
   const location = useLocation();
   
-  const PhoneNO = location.state
+  const PhoneNO = location.state || sessionStorage.getItem("phoneNo");
 
  
   useEffect(()=>{
