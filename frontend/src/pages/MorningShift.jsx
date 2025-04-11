@@ -15,17 +15,19 @@ function MorningShift() {
   const Navigate = useNavigate()
 
   useEffect(() => {
+    console.log("Location state:", location.state);
+    console.log("Session Phone:", sessionStorage.getItem("phoneNo"));
+  
     const phone = location?.state || sessionStorage.getItem("phoneNo");
+  
     if (phone) {
       setPhoneNo(phone);
-      sessionStorage.setItem("phoneNo", phone);
+      sessionStorage.setItem("phoneNo", phone); 
     } else {
-      Navigate('/PantryLogin'); 
+      Navigate('/PantryLogin');
     }
   }, [location?.state]);
 
-  console.log("Location state:", location.state);
-  console.log("Session Phone:", sessionStorage.getItem("phoneNo"));
 
   console.log("org",PhoneNo);
   

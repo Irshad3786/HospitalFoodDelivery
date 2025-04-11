@@ -30,18 +30,33 @@ function PantryDashboard() {
 
 
   const Morning = ()=>{
+    console.log("Going to MorningShift with PhoneNO:", PhoneNO);
+    if (!PhoneNO) {
+      alert("Phone number is missing!");
+      return;
+    }
     sessionStorage.setItem("phoneNo", PhoneNO);
     Navigate('/MorningShift',{state:PhoneNO})
     
   }
 
   const Evening = ()=>{
+    console.log("Going to MorningShift with PhoneNO:", PhoneNO);
+    if (!PhoneNO) {
+      alert("Phone number is missing!");
+      return;
+    }
     sessionStorage.setItem("phoneNo", PhoneNO);
     Navigate('/EveningShift',{state:PhoneNO})
     
   }
 
   const Night = ()=>{
+    console.log("Going to MorningShift with PhoneNO:", PhoneNO);
+    if (!PhoneNO) {
+      alert("Phone number is missing!");
+      return;
+    }
     sessionStorage.setItem("phoneNo", PhoneNO);
     Navigate('/NightShift',{state:PhoneNO})
     
