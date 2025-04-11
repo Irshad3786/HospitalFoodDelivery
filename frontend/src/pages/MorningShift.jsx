@@ -24,7 +24,8 @@ function MorningShift() {
   }, [location?.state]);
 
   const Navigate = useNavigate()
-
+  console.log(PhoneNo);
+  
  
   useEffect(()=>{
     axios.get(`${import.meta.env.VITE_BACKEND_URL}/VerifyPantry`,{ withCredentials: true })
