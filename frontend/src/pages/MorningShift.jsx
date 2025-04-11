@@ -11,7 +11,17 @@ function MorningShift() {
   const [OrdersData , setOrdersData] = useState([])
   const location = useLocation();
   const [Spinner , setSpinner] = useState(true)
-  const PhoneNo = location?.state || sessionStorage.getItem("phoneNo");
+  const [PhoneNo, setPhoneNo] = useState('');
+
+  useEffect(() => {
+    const phone = location?.state || sessionStorage.getItem("phoneNo");
+    if (phone) {
+      setPhoneNo(phone);
+      sessionStorage.setItem("phoneNo", phone);
+    } else {
+      Navigate('/PantryLogin'); 
+    }
+  }, [location?.state]);
 
   const Navigate = useNavigate()
 
@@ -29,7 +39,8 @@ function MorningShift() {
         
     })
     .catch((error)=>{
-
+      console.log(error);
+      
     })
   },[])
 
@@ -48,7 +59,7 @@ function MorningShift() {
       console.log(error);
       
     })
-  },[])
+  },[PhoneNo])
 
 
   useEffect(()=>{
