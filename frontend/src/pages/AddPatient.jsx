@@ -71,6 +71,7 @@ function AddPatient() {
             })
             .catch((error)=>{
                 if(error.response.data.message === ' PhoneNo already exists'){
+                    setSpinner(false)
                     toast.warn('PhoneNo already exists.')
                     
                 }
