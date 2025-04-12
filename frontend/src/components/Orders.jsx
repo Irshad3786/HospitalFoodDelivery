@@ -35,7 +35,7 @@ function Orders({orders}) {
         
         axios.get(`${import.meta.env.VITE_BACKEND_URL}/GetDelivery`)
         .then((res)=>{
-            
+            setDeliveryData(res.data.data)
             
         })
         .catch((error)=>{
