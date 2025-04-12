@@ -59,7 +59,7 @@ function EveningShift() {
       console.log(error);
       
     })
-  },[])
+  },[PhoneNo])
 
    useEffect(()=>{
   const socket = io(import.meta.env.VITE_BACKEND_URL);
@@ -94,7 +94,7 @@ function EveningShift() {
     <div className='w-[100%] min-h-screen h-max-screen bg-[#00FFAA] font-roboto'>
       <div className='pt-3 pl-3'>
       <button className='flex justify-center items-center text-lg shadow-lg font-semibold bg-white  rounded-xl pr-5 font-roboto hover:bg-slate-400' onClick={()=>{
-                    window.history.back();
+                    Navigate('/PantryDashboard');
                 }}><svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 24 24"><path fill="currentColor" d="M13.836 8.964a.9.9 0 0 1 0 1.272L12.073 12l1.763 1.764a.9.9 0 1 1-1.273 1.272l-2.4-2.4a.9.9 0 0 1 0-1.272l2.4-2.4a.9.9 0 0 1 1.273 0"/></svg>Back </button>
         </div>
         <h1 className='text-2xl text-center pt-8 font-semibold sm:text-3xl'>Evening Orders</h1>
